@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lykke.Ico.Core.Services.Emails
 {
-    public class EmailsQueuePublisher<TMessage>
+    public class EmailsQueuePublisher<TMessage> : IEmailsQueuePublisher<TMessage>
         where TMessage : IEmailMessage
     {
         private readonly IQueueExt _queue;
