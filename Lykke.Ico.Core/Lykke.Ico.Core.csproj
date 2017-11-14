@@ -8,4 +8,8 @@
     <Product>Lykke.Ico.Core</Product>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Lykke.AzureStorage" Version="2.1.4" />
+  </ItemGroup>
+
 </Project>
