@@ -4,7 +4,7 @@ using Lykke.SettingsReader;
 using System;
 using System.Threading.Tasks;
 
-namespace Lykke.Ico.Core.Services.Emails
+namespace Lykke.Ico.Core.Services
 {
     public class EmailsQueuePublisher<TMessage> : IEmailsQueuePublisher<TMessage>
         where TMessage : IEmailMessage
@@ -16,6 +16,8 @@ namespace Lykke.Ico.Core.Services.Emails
             var queueName = GetQueueName();
 
             _queue = AzureQueueExt.Create(connectionStringManager, queueName);
+
+            _queue.RegisterTypes(new QueueType[] { new QueueType() { Type = typeof(TMessage) } });
         }
 
         private string GetQueueName()
