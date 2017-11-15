@@ -2,15 +2,30 @@
 {
     public class Consts
     {
-        public class Queues
+        public class Emails
         {
-            public class Email
+            public class Queues
             {
                 public const string InvestorConfirmation = "email-investor-confirmation";
                 public const string InvestorSummary = "email-investor-summary";
                 public const string InvestorKycRequest = "email-investor-kyc-request";
                 public const string InvestorNewTransaction = "email-investor-new-transaction";
-                public const string AdminNewTransaction = "email-admin-new-transaction";
+            }
+
+            public class Subjects
+            {
+                public const string InvestorConfirmation = "Email Confirmation - Procivis ICO";
+                public const string InvestorSummary = "Summary - Procivis ICO";
+                public const string InvestorKycRequest = "KYC Requered - Procivis ICO";
+                public const string InvestorNewTransaction = "New Transaction - Procivis ICO";
+            }
+
+            public class BodyTemplates
+            {
+                public const string InvestorConfirmation = "investor-confirmation.html";
+                public const string InvestorSummary = "investor-summary.html";
+                public const string InvestorKycRequest = "investor-kyc-request.html";
+                public const string InvestorNewTransaction = "investor-new-transaction.html";
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using AzureStorage.Queue;
+using Common;
 using Lykke.Ico.Core.Contracts.Emails;
 using Lykke.SettingsReader;
 using System;
@@ -13,36 +14,29 @@ namespace Lykke.Ico.Core.Services
 
         public EmailsQueuePublisher(IReloadingManager<string> connectionStringManager)
         {
-            var queueName = GetQueueName();
+            var t = typeof(TMessage);
+            var queueName = GetQueueName(t);
 
             _queue = AzureQueueExt.Create(connectionStringManager, queueName);
-
-            _queue.RegisterTypes(new QueueType[] { new QueueType() { Type = typeof(TMessage) } });
         }
 
-        private string GetQueueName()
+        private string GetQueueName(Type t)
         {
-            var t = typeof(TMessage);
-
             if (t == typeof(InvestorConfirmation))
             {
-                return Consts.Queues.Email.InvestorConfirmation;
+                return Consts.Emails.Queues.InvestorConfirmation;
             }
             if (t == typeof(InvestorKycRequest))
             {
-                return Consts.Queues.Email.InvestorKycRequest;
+                return Consts.Emails.Queues.InvestorKycRequest;
             }
             if (t == typeof(InvestorNewTransaction))
             {
-                return Consts.Queues.Email.InvestorNewTransaction;
+                return Consts.Emails.Queues.InvestorNewTransaction;
             }
             if (t == typeof(InvestorSummary))
             {
-                return Consts.Queues.Email.InvestorNewTransaction;
-            }
-            if (t == typeof(AdminNewTransaction))
-            {
-                return Consts.Queues.Email.AdminNewTransaction;
+                return Consts.Emails.Queues.InvestorNewTransaction;
             }
 
             throw new ArgumentException($"Unsupported type {t.FullName}");
@@ -55,7 +49,7 @@ namespace Lykke.Ico.Core.Services
                 throw new ArgumentNullException(nameof(message));
             }
 
-            await _queue.PutMessageAsync(message);
+            await _queue.PutRawMessageAsync(message.ToJson());
         }            
     }
 }
