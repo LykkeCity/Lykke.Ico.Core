@@ -1,18 +1,18 @@
 ﻿using AzureStorage.Queue;
 using Common;
-using Lykke.Ico.Core.Contracts.Emails;
+using Lykke.Ico.Core.Contracts.Queues;
 using Lykke.SettingsReader;
 using System;
 using System.Threading.Tasks;
 
 namespace Lykke.Ico.Core.Services
 {
-    public class EmailsQueuePublisher<TMessage> : IEmailsQueuePublisher<TMessage>
-        where TMessage : IEmailMessage
+    public class QueuePublisher<TMessage> : IQueuePublisher<TMessage>
+        where TMessage : IMessage
     {
         private readonly IQueueExt _queue;
 
-        public EmailsQueuePublisher(IReloadingManager<string> connectionStringManager)
+        public QueuePublisher(IReloadingManager<string> connectionStringManager)
         {
             var t = typeof(TMessage);
             var queueName = GetQueueName(t);
@@ -22,19 +22,19 @@ namespace Lykke.Ico.Core.Services
 
         private string GetQueueName(Type t)
         {
-            if (t == typeof(InvestorConfirmation))
+            if (t == typeof(InvestorConfirmationMessage))
             {
                 return Consts.Emails.Queues.InvestorConfirmation;
             }
-            if (t == typeof(InvestorKycRequest))
+            if (t == typeof(InvestorKycRequestMessage))
             {
                 return Consts.Emails.Queues.InvestorKycRequest;
             }
-            if (t == typeof(InvestorNewTransaction))
+            if (t == typeof(InvestorNewTransactionMessage))
             {
                 return Consts.Emails.Queues.InvestorNewTransaction;
             }
-            if (t == typeof(InvestorSummary))
+            if (t == typeof(InvestorSummaryMessage))
             {
                 return Consts.Emails.Queues.InvestorNewTransaction;
             }
