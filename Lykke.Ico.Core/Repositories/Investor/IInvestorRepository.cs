@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Lykke.Ico.Core.Repositories.Investor
@@ -9,7 +10,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         Task<IInvestor> GetAsync(string email);
 
-        Task<IInvestor> AddAsync(string email);
+        Task<IInvestor> AddAsync(string email, Guid confirmationToken);
 
         Task UpdateAsync(IInvestor investor);
 
