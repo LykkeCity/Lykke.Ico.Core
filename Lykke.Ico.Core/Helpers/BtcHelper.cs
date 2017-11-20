@@ -11,5 +11,10 @@
         {
             return true;
         }
+
+        public static string[] GeneratePublicKeys(int amount)
+        {
+            return null;
+        }
     }
 }
