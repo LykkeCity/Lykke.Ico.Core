@@ -13,9 +13,11 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         Task<IInvestor> AddAsync(string email);
 
-        Task UpdateAddressesAsync(string email, string tokenAddress, string refundEthAddress, string refundBtcAddress);
+        Task UpdateAddressesAsync(string email, string tokenAddress, 
+            string refundEthAddress, string refundBtcAddress);
 
-        Task UpdatePayInAddressesAsync(string email, string payInEthPublicKey, string payInBtcPublicKey);
+        Task UpdatePayInAddressesAsync(string email, string payInEthPublicKey, string payInEthAddress,
+            string payInBtcPublicKey, string payInBtcAddress);
 
         Task UpdateConfirmationTokenAsync(string email, Guid confirmationToken);
 
