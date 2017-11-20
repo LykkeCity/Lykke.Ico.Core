@@ -11,23 +11,23 @@ namespace Lykke.Ico.Core.Repositories.Investor
 {
     public class InvestorRepository : IInvestorRepository
     {
-        private readonly INoSQLTableStorage<InvestorEntity> _investorTable;
+        private readonly INoSQLTableStorage<InvestorEntity> _table;
         private static string GetPartitionKey() => "Investor";
         private static string GetRowKey(string email) => email;
 
         public InvestorRepository(IReloadingManager<string> connectionStringManager, ILog log)
         {
-            _investorTable = AzureTableStorage<InvestorEntity>.Create(connectionStringManager, "Investors", log);
+            _table = AzureTableStorage<InvestorEntity>.Create(connectionStringManager, "Investors", log);
         }
 
         public async Task<IEnumerable<IInvestor>> GetAllAsync()
         {
-            return await _investorTable.GetDataAsync(GetPartitionKey());
+            return await _table.GetDataAsync(GetPartitionKey());
         }
 
         public async Task<IInvestor> GetAsync(string email)
         {
-            return await _investorTable.GetDataAsync(GetPartitionKey(), GetRowKey(email));
+            return await _table.GetDataAsync(GetPartitionKey(), GetRowKey(email));
         }
 
         public async Task<IInvestor> AddAsync(string email, string ipAddress)
@@ -37,16 +37,16 @@ namespace Lykke.Ico.Core.Repositories.Investor
             entity.PartitionKey = GetPartitionKey();
             entity.RowKey = GetRowKey(email);
 
-            await _investorTable.InsertAsync(entity);
+            await _table.InsertAsync(entity);
 
             return entity;
         }
 
-        public async Task UpdateUserAddressesAsync(string email, string vldAddress, string refundEthAddress, string refundBtcAddress)
+        public async Task UpdateAddressesAsync(string email, string tokenAddress, string refundEthAddress, string refundBtcAddress)
         {
-            await _investorTable.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
             {
-                x.TokenAddress = vldAddress;
+                x.TokenAddress = tokenAddress;
                 x.RefundEthAddress = refundEthAddress;
                 x.RefundBtcAddress = refundBtcAddress;
 
@@ -56,7 +56,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         public async Task UpdatePayInAddressesAsync(string email, string payInEthPublicKey, string payInBtcPublicKey)
         {
-            await _investorTable.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
             {
                 x.PayInEthPublicKey = payInEthPublicKey;
                 x.PayInBtcPublicKey = payInBtcPublicKey;
@@ -67,7 +67,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         public async Task RemoveAsync(string email)
         {
-            await _investorTable.DeleteIfExistAsync(GetPartitionKey(), GetRowKey(email));
+            await _table.DeleteIfExistAsync(GetPartitionKey(), GetRowKey(email));
         }
     }
 }

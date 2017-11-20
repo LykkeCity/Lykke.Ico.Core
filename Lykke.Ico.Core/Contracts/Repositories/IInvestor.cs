@@ -8,18 +8,18 @@ namespace Lykke.Ico.Core.Contracts.Repositories
 
         string TokenAddress { get; set; }
 
-        string PayInEthPublicKey { get; set; }
-
-        string PayInBtcPublicKey { get; set; }
-
         string RefundEthAddress { get; set; }
 
         string RefundBtcAddress { get; set; }
 
-        DateTime CreationDateTime { get; set; }
+        string PayInEthPublicKey { get; set; }
 
-        string IpAddress { get; set; }
+        string PayInEthAddress { get; set; }
 
-        Guid ConfirmationToken { get; set; }
+        string PayInBtcPublicKey { get; set; }
+
+        string PayInBtcAddress { get; set; }
+
+        DateTime Updated { get; set; }
     }
 }

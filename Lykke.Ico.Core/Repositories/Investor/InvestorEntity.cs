@@ -12,26 +12,24 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         public string PayInEthPublicKey { get; set; }
 
+        public string PayInEthAddress { get; set; }
+
         public string PayInBtcPublicKey { get; set; }
+
+        public string PayInBtcAddress { get; set; }
 
         public string RefundEthAddress { get; set; }
 
         public string RefundBtcAddress { get; set; }
 
-        public DateTime CreationDateTime { get; set; }
-
-        public string IpAddress { get; set; }
-
-        public Guid ConfirmationToken { get; set; }
+        public DateTime Updated { get; set; }
 
         public static InvestorEntity Create(string email, string ipAddress)
         {
             return new InvestorEntity
             {
                 Email = email,
-                CreationDateTime = DateTime.Now,
-                IpAddress = ipAddress,
-                ConfirmationToken = Guid.NewGuid()
+                Updated = DateTime.Now
             };
         }
     }
