@@ -1,11 +1,11 @@
 ﻿using AzureStorage.Queue;
 using Common;
-using Lykke.Ico.Core.Contracts.Queues;
+using Lykke.Ico.Core.Queues.Emails;
 using Lykke.SettingsReader;
 using System;
 using System.Threading.Tasks;
 
-namespace Lykke.Ico.Core.Services
+namespace Lykke.Ico.Core.Queues
 {
     public class QueuePublisher<TMessage> : IQueuePublisher<TMessage>
         where TMessage : IMessage

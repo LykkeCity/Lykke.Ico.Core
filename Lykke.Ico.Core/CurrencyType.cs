@@ -1,4 +1,4 @@
-﻿namespace Lykke.Ico.Core.Contracts
+﻿namespace Lykke.Ico.Core
 {
     public enum CurrencyType
     {

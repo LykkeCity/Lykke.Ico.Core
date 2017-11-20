@@ -1,4 +1,4 @@
-﻿namespace Lykke.Ico.Core.Contracts.Repositories
+﻿namespace Lykke.Ico.Core.Repositories.InvestorAttribute
 {
     public enum InvestorAttributeType
     {

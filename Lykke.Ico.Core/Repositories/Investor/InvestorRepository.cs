@@ -1,7 +1,6 @@
 ﻿using AzureStorage;
 using AzureStorage.Tables;
 using Common.Log;
-using Lykke.Ico.Core.Contracts.Repositories;
 using Lykke.SettingsReader;
 using System;
 using System.Collections.Generic;
@@ -42,40 +41,19 @@ namespace Lykke.Ico.Core.Repositories.Investor
             return entity;
         }
 
-        public async Task UpdateAddressesAsync(string email, string tokenAddress, string refundEthAddress, string refundBtcAddress)
+        public async Task UpdateAsync(IInvestor investor)
         {
-            await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            await _table.MergeAsync(GetPartitionKey(), GetRowKey(investor.Email), x =>
             {
-                x.TokenAddress = tokenAddress;
-                x.RefundEthAddress = refundEthAddress;
-                x.RefundBtcAddress = refundBtcAddress;
-                x.Updated = DateTime.Now;
-
-                return x;
-            });
-        }
-
-        public async Task UpdatePayInAddressesAsync(string email, string payInEthPublicKey, string payInEthAddress, 
-            string payInBtcPublicKey, string payInBtcAddress)
-        {
-            await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
-            {
-                x.PayInEthPublicKey = payInEthPublicKey;
-                x.PayInEthAddress = payInEthAddress;
-                x.PayInBtcPublicKey = payInBtcPublicKey;
-                x.PayInBtcAddress = payInBtcAddress;
-                x.Updated = DateTime.Now;
-
-                return x;
-            });
-        }
-
-        public async Task UpdateConfirmationTokenAsync(string email, Guid confirmationToken)
-        {
-            await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
-            {
-                x.ConfirmationToken = confirmationToken;
-                x.ConfirmationDateTime = DateTime.Now;
+                x.TokenAddress = investor.TokenAddress;
+                x.RefundEthAddress = investor.RefundEthAddress;
+                x.RefundBtcAddress = investor.RefundBtcAddress;
+                x.PayInEthPublicKey = investor.PayInEthPublicKey;
+                x.PayInEthAddress = investor.PayInEthAddress;
+                x.PayInBtcPublicKey = investor.PayInBtcPublicKey;
+                x.PayInBtcAddress = investor.PayInBtcAddress;
+                x.ConfirmationToken = investor.ConfirmationToken;
+                x.ConfirmationDateTime = investor.ConfirmationDateTime;
                 x.Updated = DateTime.Now;
 
                 return x;

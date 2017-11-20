@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lykke.Ico.Core.Contracts.Repositories
+namespace Lykke.Ico.Core.Repositories.Investor
 {
     public interface IInvestor
     {

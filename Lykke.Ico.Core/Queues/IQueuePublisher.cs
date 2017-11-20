@@ -1,7 +1,6 @@
-﻿using Lykke.Ico.Core.Contracts.Queues;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace Lykke.Ico.Core.Services
+namespace Lykke.Ico.Core.Queues
 {
     public interface IQueuePublisher<TMessage>
         where TMessage : IMessage

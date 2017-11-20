@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lykke.Ico.Core.Contracts.Queues
+namespace Lykke.Ico.Core.Queues.Emails
 {
     public class InvestorConfirmationMessage : IInvestorMessage
     {

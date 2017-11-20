@@ -1,5 +1,4 @@
-﻿using Lykke.Ico.Core.Contracts.Repositories;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Lykke.Ico.Core.Repositories.InvestorAttribute
 {

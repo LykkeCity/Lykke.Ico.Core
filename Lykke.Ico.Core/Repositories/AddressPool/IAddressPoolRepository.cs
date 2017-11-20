@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Lykke.Ico.Core.Contracts.Repositories;
 
 namespace Lykke.Ico.Core.Repositories.AddressPool
 {

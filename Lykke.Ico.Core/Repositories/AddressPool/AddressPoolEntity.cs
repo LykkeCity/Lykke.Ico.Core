@@ -1,5 +1,4 @@
-﻿using Lykke.Ico.Core.Contracts.Repositories;
-using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Lykke.Ico.Core.Repositories.AddressPool
 {

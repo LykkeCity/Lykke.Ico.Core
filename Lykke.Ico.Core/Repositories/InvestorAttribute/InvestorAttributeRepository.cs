@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Lykke.Ico.Core.Contracts.Repositories;
 using AzureStorage;
 using AzureStorage.Tables;
 using Lykke.SettingsReader;

@@ -1,4 +1,4 @@
-﻿namespace Lykke.Ico.Core.Contracts.Queues
+﻿namespace Lykke.Ico.Core.Queues
 {
     public interface IMessage
     {
