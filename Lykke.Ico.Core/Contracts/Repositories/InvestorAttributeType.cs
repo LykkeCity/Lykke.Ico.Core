@@ -3,7 +3,7 @@
     public enum InvestorAttributeType
     {
         EthPublicKey,
-        BthPublicKey,
+        BtcPublicKey,
         ConfirmationToken
     }
 }
