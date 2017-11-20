@@ -55,12 +55,15 @@ namespace Lykke.Ico.Core.Repositories.Investor
             });
         }
 
-        public async Task UpdatePayInAddressesAsync(string email, string payInEthPublicKey, string payInBtcPublicKey)
+        public async Task UpdatePayInAddressesAsync(string email, string payInEthPublicKey, string payInEthAddress, 
+            string payInBtcPublicKey, string payInBtcAddress)
         {
             await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
             {
                 x.PayInEthPublicKey = payInEthPublicKey;
+                x.PayInEthAddress = payInEthAddress;
                 x.PayInBtcPublicKey = payInBtcPublicKey;
+                x.PayInBtcAddress = payInBtcAddress;
                 x.Updated = DateTime.Now;
 
                 return x;
