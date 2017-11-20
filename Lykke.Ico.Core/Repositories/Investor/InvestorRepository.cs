@@ -30,9 +30,9 @@ namespace Lykke.Ico.Core.Repositories.Investor
             return await _table.GetDataAsync(GetPartitionKey(), GetRowKey(email));
         }
 
-        public async Task<IInvestor> AddAsync(string email, string ipAddress)
+        public async Task<IInvestor> AddAsync(string email)
         {
-            var entity = InvestorEntity.Create(email, ipAddress);
+            var entity = InvestorEntity.Create(email);
 
             entity.PartitionKey = GetPartitionKey();
             entity.RowKey = GetRowKey(email);
@@ -49,6 +49,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
                 x.TokenAddress = tokenAddress;
                 x.RefundEthAddress = refundEthAddress;
                 x.RefundBtcAddress = refundBtcAddress;
+                x.Updated = DateTime.Now;
 
                 return x;
             });
@@ -60,6 +61,19 @@ namespace Lykke.Ico.Core.Repositories.Investor
             {
                 x.PayInEthPublicKey = payInEthPublicKey;
                 x.PayInBtcPublicKey = payInBtcPublicKey;
+                x.Updated = DateTime.Now;
+
+                return x;
+            });
+        }
+
+        public async Task UpdateConfirmationTokenAsync(string email, Guid confirmationToken)
+        {
+            await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.ConfirmationToken = confirmationToken;
+                x.ConfirmationDateTime = DateTime.Now;
+                x.Updated = DateTime.Now;
 
                 return x;
             });
