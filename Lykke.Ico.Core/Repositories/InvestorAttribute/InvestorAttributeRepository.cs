@@ -18,7 +18,7 @@ namespace Lykke.Ico.Core.Repositories.InvestorAttribute
 
         public InvestorAttributeRepository(IReloadingManager<string> connectionStringManager, ILog log)
         {
-            _table = AzureTableStorage<InvestorAttributeEntity>.Create(connectionStringManager, "InvestorAttributes", log);
+            _table = AzureTableStorage<InvestorAttributeEntity>.Create(connectionStringManager, "InvestorAttribute", log);
         }
 
         public async Task<string> GetInvestorEmailAsync(InvestorAttributeType type, string value)

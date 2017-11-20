@@ -21,5 +21,9 @@ namespace Lykke.Ico.Core.Contracts.Repositories
         string PayInBtcAddress { get; set; }
 
         DateTime Updated { get; set; }
+
+        Guid? ConfirmationToken { get; set; }
+
+        DateTime? ConfirmationDateTime { get; set; }
     }
 }
