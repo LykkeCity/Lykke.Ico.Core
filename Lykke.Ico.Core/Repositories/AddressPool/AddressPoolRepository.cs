@@ -50,7 +50,7 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
 
         public async Task RemoveAsync(string email)
         {
-            var items = await _table.GetDataAsync("");
+            var items = await _table.GetDataAsync(GetPartitionKey(email));
             if (items.Any())
             {
                 await _table.DeleteAsync(items);
