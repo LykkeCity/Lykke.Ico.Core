@@ -36,7 +36,7 @@ namespace Lykke.Ico.Core.Queues
             }
             if (t == typeof(InvestorSummaryMessage))
             {
-                return Consts.Emails.Queues.InvestorNewTransaction;
+                return Consts.Emails.Queues.InvestorSummary;
             }
 
             throw new ArgumentException($"Unsupported type {t.FullName}");

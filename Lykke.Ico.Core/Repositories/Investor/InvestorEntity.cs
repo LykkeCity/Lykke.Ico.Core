@@ -27,11 +27,13 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         public DateTime? ConfirmationDateTime { get; set; }
 
-        public static InvestorEntity Create(string email)
+        public static InvestorEntity Create(string email, Guid confirmationToken)
         {
             return new InvestorEntity
             {
                 Email = email,
+                ConfirmationToken = confirmationToken,
+                ConfirmationDateTime = DateTime.Now,
                 Updated = DateTime.Now
             };
         }
