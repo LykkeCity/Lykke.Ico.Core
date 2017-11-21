@@ -18,8 +18,8 @@
                 EmailTo = email,
                 Attempts = 0,
                 TokenAddress = tokenAddress,
-                RefundEthAddress = refundEthAddress,
                 RefundBtcAddress = refundBtcAddress,
+                RefundEthAddress = refundEthAddress,
                 PayInBtcAddress = payInBtcAddress,
                 PayInEthAddress = payInEthAddress
             };
