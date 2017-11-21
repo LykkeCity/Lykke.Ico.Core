@@ -34,5 +34,10 @@ namespace Lykke.Ico.Core.Repositories.InvestorAttribute
 
             await _table.InsertOrMergeAsync(entity);
         }
+
+        public async Task RemoveAsync(InvestorAttributeType type, string email)
+        {
+            await _table.DeleteIfExistAsync(GetPartitionKey(type), GetRowKey(email));
+        }
     }
 }

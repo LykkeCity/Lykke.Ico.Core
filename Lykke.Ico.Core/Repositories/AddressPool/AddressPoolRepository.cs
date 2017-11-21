@@ -4,6 +4,7 @@ using Common.Log;
 using Lykke.SettingsReader;
 using System.Threading.Tasks;
 using System.Linq;
+using System;
 
 namespace Lykke.Ico.Core.Repositories.AddressPool
 {
@@ -18,9 +19,22 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
             _table = AzureTableStorage<AddressPoolEntity>.Create(connectionStringManager, "AddressPool", log);
         }
 
-        public async Task<IAddressPoolItem> GetNextFreeAsync()
+        public async Task<IAddressPoolItem> GetNextFreeAsync(string email)
         {
-            return (await _table.GetDataAsync("")).FirstOrDefault();
+            var poolItem = (await _table.GetDataAsync("")).FirstOrDefault();
+            if (poolItem == null)
+            {
+                throw new Exception("There are no free addresses in address pool");
+            }
+
+            await _table.MergeAsync(poolItem.PartitionKey, poolItem.RowKey, x =>
+            {
+                x.PartitionKey = email;
+
+                return x;
+            });
+
+            return poolItem;
         }
 
         public async Task<IAddressPoolItem> AddAsync(string ethPulicKey, string btcPublicKey)
@@ -33,6 +47,15 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
             await _table.InsertAsync(entity);
 
             return entity;
+        }
+
+        public async Task RemoveAsync(string email)
+        {
+            var items = await _table.GetDataAsync("");
+            if (items.Any())
+            {
+                await _table.DeleteAsync(items);
+            }
         }
     }
 }
