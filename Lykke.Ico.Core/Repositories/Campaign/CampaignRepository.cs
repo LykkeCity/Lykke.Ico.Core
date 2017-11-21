@@ -20,13 +20,13 @@ namespace Lykke.Ico.Core.Repositories.Campaign
             _tableStorage = AzureTableStorage<CampaignEntity>.Create(connectionStringManager, "Campaigns", log);
         }
 
-        public async Task<decimal?> GetTotalRaisedAsync()
+        public async Task<decimal> GetTotalRaisedAsync()
         {
             var partitionKey = GetPartitionKey();
             var rowKey = GetRowKey();
             var entity = await _tableStorage.GetDataAsync(partitionKey, rowKey);
 
-            return entity?.TotalRaised;
+            return entity?.TotalRaised ?? 0M;
         }
 
         public async Task SaveAsync(decimal totalRaised)
