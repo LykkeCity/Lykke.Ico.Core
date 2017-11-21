@@ -21,20 +21,19 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
 
         public async Task<IAddressPoolItem> GetNextFreeAsync(string email)
         {
-            var poolItem = (await _table.GetDataAsync("")).FirstOrDefault();
-            if (poolItem == null)
+            var entity = (await _table.GetDataAsync("")).FirstOrDefault();
+            if (entity == null)
             {
                 throw new Exception("There are no free addresses in address pool");
             }
 
-            await _table.MergeAsync(poolItem.PartitionKey, poolItem.RowKey, x =>
-            {
-                x.PartitionKey = email;
+            await _table.DeleteAsync(entity);
 
-                return x;
-            });
+            entity.PartitionKey = GetPartitionKey(email);
 
-            return poolItem;
+            await _table.InsertAsync(entity);
+
+            return entity;
         }
 
         public async Task<IAddressPoolItem> AddAsync(string ethPulicKey, string btcPublicKey)
