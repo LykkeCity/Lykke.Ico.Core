@@ -29,6 +29,17 @@ namespace Lykke.Ico.Core.Repositories.Campaign
             return entity?.TotalRaised ?? 0M;
         }
 
+        public async Task<decimal> IncreaseTotalRaisedAsync(decimal increment)
+        {
+            decimal totalRaised = await GetTotalRaisedAsync();
+
+            totalRaised += increment;
+
+            await SaveAsync(totalRaised);
+
+            return totalRaised;
+        }
+
         public async Task SaveAsync(decimal totalRaised)
         {
             await _tableStorage.InsertOrReplaceAsync(new CampaignEntity
