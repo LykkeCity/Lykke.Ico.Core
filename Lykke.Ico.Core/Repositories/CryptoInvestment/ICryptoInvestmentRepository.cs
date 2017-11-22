@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Lykke.Ico.Core.Repositories.Investment
+{
+    public interface ICryptoInvestmentRepository
+    {
+        Task<IEnumerable<ICryptoInvestment>> GetInvestmentsAsync(string investorEmail);
+
+        Task SaveAsync(
+            string investorEmail, 
+            string txId, 
+            string blockId, 
+            DateTimeOffset blockTimestamp, 
+            string destinationAddress, 
+            CurrencyType currencyType, 
+            decimal exchangeRate,
+            decimal amount, 
+            decimal amountUsd);
+    }
+}

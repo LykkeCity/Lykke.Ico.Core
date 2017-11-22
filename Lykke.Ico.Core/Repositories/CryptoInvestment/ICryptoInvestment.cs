@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Lykke.Ico.Core.Repositories.Investment
 {
-    public interface IInvestment
+    public interface ICryptoInvestment
     {
-        string Email { get; }
+        string InvestorEmail { get; }
         string TransactionId { get; }
         string BlockId { get; set; }
         DateTimeOffset BlockTimestamp { get; set; }

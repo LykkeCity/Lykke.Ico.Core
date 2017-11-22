@@ -4,10 +4,10 @@ using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Lykke.Ico.Core.Repositories.Investment
 {
-    internal class InvestmentEntity : AzureTableEntity, IInvestment
+    internal class CryptoInvestmentEntity : AzureTableEntity, ICryptoInvestment
     {
         [IgnoreProperty]
-        public string Email
+        public string InvestorEmail
         {
             get => PartitionKey;
         }
