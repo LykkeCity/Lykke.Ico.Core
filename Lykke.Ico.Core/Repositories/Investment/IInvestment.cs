@@ -7,8 +7,12 @@ namespace Lykke.Ico.Core.Repositories.Investment
     public interface IInvestment
     {
         string Email { get; }
-        string Transaction { get; }
+        string TransactionId { get; }
+        string BlockId { get; set; }
+        DateTimeOffset BlockTimestamp { get; set; }
+        string DestinationAddress { get; set; }
         CurrencyType CurrencyType { get; set; }
+        decimal ExchangeRate { get; set; }
         decimal Amount { get; set; }
         decimal AmountUsd { get; set; }
     }
