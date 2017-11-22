@@ -12,8 +12,8 @@ namespace Lykke.Ico.Core.Repositories.Investment
         DateTimeOffset BlockTimestamp { get; set; }
         string DestinationAddress { get; set; }
         CurrencyType CurrencyType { get; set; }
-        decimal ExchangeRate { get; set; }
         decimal Amount { get; set; }
+        decimal ExchangeRate { get; set; }
         decimal AmountUsd { get; set; }
     }
 }

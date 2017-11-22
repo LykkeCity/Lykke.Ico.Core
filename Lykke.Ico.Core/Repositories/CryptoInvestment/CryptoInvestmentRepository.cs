@@ -32,8 +32,8 @@ namespace Lykke.Ico.Core.Repositories.Investment
             DateTimeOffset blockTimestamp,
             string destinationAddress,
             CurrencyType currencyType,
-            decimal exchangeRate,
             decimal amount,
+            decimal exchangeRate,
             decimal amountUsd)
         {
             await _tableStorage.InsertOrMergeAsync(new CryptoInvestmentEntity
@@ -44,8 +44,8 @@ namespace Lykke.Ico.Core.Repositories.Investment
                 BlockTimestamp = blockTimestamp,
                 DestinationAddress = destinationAddress,
                 CurrencyType = currencyType,
-                ExchangeRate = exchangeRate,
                 Amount = amount,
+                ExchangeRate = exchangeRate,
                 AmountUsd = amountUsd
             });
         }
