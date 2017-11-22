@@ -1,6 +1,7 @@
 ﻿using AzureStorage;
 using AzureStorage.Tables;
 using Common.Log;
+using Lykke.Ico.Core.Repositories.InvestorHistory;
 using Lykke.SettingsReader;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,12 @@ namespace Lykke.Ico.Core.Repositories.Investor
         private static string GetPartitionKey() => "Investor";
         private static string GetRowKey(string email) => email;
 
+        private readonly IInvestorHistoryRepository _investorHistoryRepository;
+
         public InvestorRepository(IReloadingManager<string> connectionStringManager, ILog log)
         {
             _table = AzureTableStorage<InvestorEntity>.Create(connectionStringManager, "Investors", log);
+            _investorHistoryRepository = new InvestorHistoryRepository(connectionStringManager, log);
         }
 
         public async Task<IEnumerable<IInvestor>> GetAllAsync()
@@ -37,13 +41,14 @@ namespace Lykke.Ico.Core.Repositories.Investor
             entity.RowKey = GetRowKey(email);
 
             await _table.InsertAsync(entity);
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Create);
 
             return entity;
         }
 
         public async Task UpdateAsync(IInvestor investor)
         {
-            await _table.MergeAsync(GetPartitionKey(), GetRowKey(investor.Email), x =>
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(investor.Email), x =>
             {
                 x.TokenAddress = investor.TokenAddress;
                 x.RefundEthAddress = investor.RefundEthAddress;
@@ -58,6 +63,8 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
                 return x;
             });
+
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
         }
 
         public async Task RemoveAsync(string email)
