@@ -1,5 +1,6 @@
 ﻿namespace Lykke.Ico.Core.Queues.Emails
 {
+    [QueueMessage(QueueName = Consts.Emails.Queues.InvestorNewTransaction)]
     public class InvestorNewTransactionMessage : IInvestorMessage
     {
         public string EmailTo { get; set; }

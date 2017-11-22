@@ -1,9 +1,12 @@
-﻿using AzureStorage.Queue;
+﻿using System;
+using System.Threading.Tasks;
+using AzureStorage.Queue;
+using System.Linq;
 using Common;
 using Lykke.Ico.Core.Queues.Emails;
+using Lykke.Ico.Core.Queues.Transactions;
 using Lykke.SettingsReader;
-using System;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Lykke.Ico.Core.Queues
 {
@@ -22,24 +25,21 @@ namespace Lykke.Ico.Core.Queues
 
         private string GetQueueName(Type t)
         {
-            if (t == typeof(InvestorConfirmationMessage))
-            {
-                return Consts.Emails.Queues.InvestorConfirmation;
-            }
-            if (t == typeof(InvestorKycRequestMessage))
-            {
-                return Consts.Emails.Queues.InvestorKycRequest;
-            }
-            if (t == typeof(InvestorNewTransactionMessage))
-            {
-                return Consts.Emails.Queues.InvestorNewTransaction;
-            }
-            if (t == typeof(InvestorSummaryMessage))
-            {
-                return Consts.Emails.Queues.InvestorSummary;
-            }
+            var metadata = Attribute.GetCustomAttribute(t, typeof(QueueMessageAttribute), true) as QueueMessageAttribute;
 
-            throw new ArgumentException($"Unsupported type {t.FullName}");
+            if (metadata == null || string.IsNullOrWhiteSpace(metadata.QueueName))
+            {
+                var replacedMessage = t.Name.Replace("Message", string.Empty);
+                var splittedByUppercase = Regex.Split(replacedMessage, @"(?<!^)(?=[A-Z])");
+                var lowerCased = splittedByUppercase.Select(x => x.ToLowerInvariant());
+                var dashed = string.Join("-", lowerCased);
+
+                return dashed;
+            }
+            else
+            {
+                return metadata.QueueName;
+            }
         }
 
         public async Task SendAsync(TMessage message)
