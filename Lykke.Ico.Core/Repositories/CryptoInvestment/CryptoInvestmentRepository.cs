@@ -7,7 +7,7 @@ using AzureStorage.Tables;
 using Common.Log;
 using Lykke.SettingsReader;
 
-namespace Lykke.Ico.Core.Repositories.Investment
+namespace Lykke.Ico.Core.Repositories.CryptoInvestment
 {
     public class CryptoInvestmentRepository : ICryptoInvestmentRepository
     {

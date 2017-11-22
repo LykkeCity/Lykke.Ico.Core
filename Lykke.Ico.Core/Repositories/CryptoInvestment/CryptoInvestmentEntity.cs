@@ -2,7 +2,7 @@
 using Lykke.AzureStorage.Tables;
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace Lykke.Ico.Core.Repositories.Investment
+namespace Lykke.Ico.Core.Repositories.CryptoInvestment
 {
     internal class CryptoInvestmentEntity : AzureTableEntity, ICryptoInvestment
     {

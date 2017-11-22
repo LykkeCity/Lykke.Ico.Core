@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Lykke.Ico.Core.Repositories.Investment
+namespace Lykke.Ico.Core.Repositories.CryptoInvestment
 {
     public interface ICryptoInvestmentRepository
     {
