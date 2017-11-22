@@ -7,6 +7,7 @@ using Lykke.Ico.Core.Queues.Emails;
 using Lykke.Ico.Core.Queues.Transactions;
 using Lykke.SettingsReader;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Lykke.Ico.Core.Queues
 {
@@ -26,6 +27,9 @@ namespace Lykke.Ico.Core.Queues
         private string GetQueueName(Type t)
         {
             var metadata = Attribute.GetCustomAttribute(t, typeof(QueueMessageAttribute), true) as QueueMessageAttribute;
+
+            Debug.Assert(metadata != null && !string.IsNullOrWhiteSpace(metadata.QueueName), 
+                $"Consider using [QueueMessage] attribute on {t.FullName} type to define queue name explicitly.");
 
             if (metadata == null || string.IsNullOrWhiteSpace(metadata.QueueName))
             {
