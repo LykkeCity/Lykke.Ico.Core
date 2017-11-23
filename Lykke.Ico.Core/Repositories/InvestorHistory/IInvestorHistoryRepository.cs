@@ -9,5 +9,7 @@ namespace Lykke.Ico.Core.Repositories.InvestorHistory
         Task<IEnumerable<IInvestorHistoryItem>> GetAsync(string email);
 
         Task SaveAsync(IInvestor investor, InvestorHistoryAction action);
+
+        Task RemoveAsync(string email);
     }
 }
