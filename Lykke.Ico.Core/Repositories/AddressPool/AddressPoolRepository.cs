@@ -22,23 +22,22 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
 
         public IAddressPoolItem GetNextFree(string email)
         {
-            AddressPoolEntity entity;
-
             lock (_lock)
             {
-                try
+                var query = new Microsoft.WindowsAzure.Storage.Table.TableQuery<AddressPoolEntity>().Take(1);
+                var page = new AzureStorage.Tables.Paging.PagingInfo();
+                var result = _table.ExecuteQueryWithPaginationAsync(query, page).Result;
+
+                var entity = result.FirstOrDefault();
+                if (entity == null)
                 {
-                    entity = _table.First();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("There are no free addresses in address pool", ex);
+                    throw new Exception("There are no free addresses in address pool");
                 }
 
                 _table.DeleteAsync(entity).Wait();
-            }
 
-            return entity;
+                return entity;
+            }
         }
 
         public async Task<IAddressPoolItem> AddAsync(string ethPulicKey, string btcPublicKey)
