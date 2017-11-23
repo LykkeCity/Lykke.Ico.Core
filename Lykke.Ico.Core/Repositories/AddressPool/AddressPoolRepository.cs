@@ -10,6 +10,7 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
 {
     public class AddressPoolRepository : IAddressPoolRepository
     {
+        private static readonly Object _lock = new Object();
         private readonly INoSQLTableStorage<AddressPoolEntity> _table;
         private static string GetPartitionKey() => "";
         private static string GetRowKey(string ehtKey, string btcKey) => (DateTime.MaxValue.Ticks - DateTime.UtcNow.Ticks).ToString("d19");
@@ -19,20 +20,23 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
             _table = AzureTableStorage<AddressPoolEntity>.Create(connectionStringManager, "AddressPool", log);
         }
 
-        public async Task<IAddressPoolItem> GetNextFreeAsync(string email)
+        public IAddressPoolItem GetNextFree(string email)
         {
             AddressPoolEntity entity;
 
-            try
+            lock (_lock)
             {
-                entity = _table.First();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("There are no free addresses in address pool", ex);
-            }
+                try
+                {
+                    entity = _table.First();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("There are no free addresses in address pool", ex);
+                }
 
-            await _table.DeleteAsync(entity);
+                _table.DeleteAsync(entity).Wait();
+            }
 
             return entity;
         }
