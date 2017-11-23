@@ -3,6 +3,5 @@
     public interface IInvestorMessage : IMessage
     {
         string EmailTo { get; set; }
-        int Attempts { get; set; }
     }
 }

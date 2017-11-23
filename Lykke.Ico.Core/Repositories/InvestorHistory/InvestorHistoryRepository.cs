@@ -15,7 +15,7 @@ namespace Lykke.Ico.Core.Repositories.InvestorHistory
     {
         private readonly INoSQLTableStorage<InvestorHistoryEntity> _table;
         private static string GetPartitionKey(string email) => email;
-        private static string GetRowKey() => DateTime.Now.ToString();
+        private static string GetRowKey() => DateTime.UtcNow.ToString("o");
 
         public InvestorHistoryRepository(IReloadingManager<string> connectionStringManager, ILog log)
         {

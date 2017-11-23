@@ -4,7 +4,7 @@
     {
         string Email { get; }
 
-        string When { get; }
+        string Type { get; }
 
         string Subject { get; set; }
 

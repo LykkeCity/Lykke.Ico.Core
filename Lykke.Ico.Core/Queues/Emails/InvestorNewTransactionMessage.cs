@@ -3,7 +3,6 @@
     public class InvestorNewTransactionMessage : IInvestorMessage
     {
         public string EmailTo { get; set; }
-        public int Attempts { get; set; }
         public CurrencyType CurrencyType { get; set; }
         public string Amount { get; set; }
 
@@ -12,7 +11,6 @@
             return new InvestorNewTransactionMessage
             {
                 EmailTo = email,
-                Attempts = 0,
                 CurrencyType = currencyType,
                 Amount = amount
             };
