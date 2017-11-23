@@ -36,7 +36,7 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
             decimal exchangeRate,
             decimal amountUsd)
         {
-            await _tableStorage.InsertOrMergeAsync(new CryptoInvestmentEntity
+            await _tableStorage.InsertOrReplaceAsync(new CryptoInvestmentEntity
             {
                 PartitionKey = GetPartitionKey(investorEmail),
                 RowKey = GetRowKey(txId),

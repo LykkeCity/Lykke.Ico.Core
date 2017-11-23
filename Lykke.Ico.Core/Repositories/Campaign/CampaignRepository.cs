@@ -42,7 +42,7 @@ namespace Lykke.Ico.Core.Repositories.Campaign
 
         public async Task SaveAsync(decimal totalRaised)
         {
-            await _tableStorage.InsertOrMergeAsync(new CampaignEntity
+            await _tableStorage.InsertOrReplaceAsync(new CampaignEntity
             {
                 PartitionKey = GetPartitionKey(),
                 RowKey = GetRowKey(),
