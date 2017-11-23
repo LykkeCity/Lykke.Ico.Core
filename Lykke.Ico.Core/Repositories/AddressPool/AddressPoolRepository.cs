@@ -11,8 +11,8 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
     public class AddressPoolRepository : IAddressPoolRepository
     {
         private readonly INoSQLTableStorage<AddressPoolEntity> _table;
-        private static string GetPartitionKey(string email) => email;
-        private static string GetRowKey(string ehtKey, string btcKey) => $"{ehtKey}_{btcKey}";
+        private static string GetPartitionKey() => "";
+        private static string GetRowKey(string ehtKey, string btcKey) => (DateTime.MaxValue.Ticks - DateTime.UtcNow.Ticks).ToString("d19");
 
         public AddressPoolRepository(IReloadingManager<string> connectionStringManager, ILog log)
         {
@@ -21,17 +21,18 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
 
         public async Task<IAddressPoolItem> GetNextFreeAsync(string email)
         {
-            var entity = (await _table.GetDataAsync("")).FirstOrDefault();
-            if (entity == null)
+            AddressPoolEntity entity;
+
+            try
             {
-                throw new Exception("There are no free addresses in address pool");
+                entity = _table.First();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("There are no free addresses in address pool", ex);
             }
 
             await _table.DeleteAsync(entity);
-
-            entity.PartitionKey = GetPartitionKey(email);
-
-            await _table.InsertAsync(entity);
 
             return entity;
         }
@@ -40,21 +41,12 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
         {
             var entity = AddressPoolEntity.Create(ethPulicKey, btcPublicKey);
 
-            entity.PartitionKey = GetPartitionKey("");
+            entity.PartitionKey = GetPartitionKey();
             entity.RowKey = GetRowKey(ethPulicKey, btcPublicKey);
 
             await _table.InsertAsync(entity);
 
             return entity;
-        }
-
-        public async Task RemoveAsync(string email)
-        {
-            var items = await _table.GetDataAsync(GetPartitionKey(email));
-            if (items.Any())
-            {
-                await _table.DeleteAsync(items);
-            }
         }
     }
 }

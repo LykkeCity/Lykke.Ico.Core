@@ -7,7 +7,5 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
         Task<IAddressPoolItem> AddAsync(string ethPulicKey, string btcPublicKey);
 
         Task<IAddressPoolItem> GetNextFreeAsync(string email);
-
-        Task RemoveAsync(string email);
     }
 }
