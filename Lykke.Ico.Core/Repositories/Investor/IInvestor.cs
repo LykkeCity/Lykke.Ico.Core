@@ -20,10 +20,10 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         string PayInBtcAddress { get; set; }
 
-        DateTime Updated { get; set; }
+        DateTime UpdatedUtc { get; set; }
 
         Guid? ConfirmationToken { get; set; }
 
-        DateTime? ConfirmationDateTime { get; set; }
+        DateTime? ConfirmationDateTimeUtc { get; set; }
     }
 }

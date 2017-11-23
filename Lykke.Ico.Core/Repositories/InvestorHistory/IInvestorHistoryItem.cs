@@ -1,10 +1,12 @@
-﻿namespace Lykke.Ico.Core.Repositories.InvestorHistory
+﻿using System;
+
+namespace Lykke.Ico.Core.Repositories.InvestorHistory
 {
     public interface IInvestorHistoryItem
     {
         string Email { get; }
 
-        string When { get; }
+        DateTime WhenUtc { get; }
 
         InvestorHistoryAction Action { get; set; }
 
