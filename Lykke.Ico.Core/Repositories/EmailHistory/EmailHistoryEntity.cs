@@ -8,8 +8,7 @@ namespace Lykke.Ico.Core.Repositories.EmailHistory
         [IgnoreProperty]
         public string Email { get => PartitionKey; }
 
-        [IgnoreProperty]
-        public string When { get => RowKey; }
+        public string Type { get; set; }
 
         public string Subject { get; set; }
 

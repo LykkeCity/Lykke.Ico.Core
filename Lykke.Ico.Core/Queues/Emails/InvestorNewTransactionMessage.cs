@@ -4,7 +4,6 @@
     public class InvestorNewTransactionMessage : IInvestorMessage
     {
         public string EmailTo { get; set; }
-        public int Attempts { get; set; }
         public string Payment { get; set; }
         public string TransactionLink { get; set; }
 
@@ -13,7 +12,6 @@
             return new InvestorNewTransactionMessage
             {
                 EmailTo = emailTo,
-                Attempts = 0,
                 Payment = payment,
                 TransactionLink = transactionLink
             };

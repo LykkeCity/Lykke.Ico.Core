@@ -4,7 +4,6 @@
     public class InvestorSummaryMessage : IInvestorMessage
     {
         public string EmailTo { get; set; }
-        public int Attempts { get; set; }
         public string TokenAddress { get; set; }
         public string RefundBtcAddress { get; set; }
         public string RefundEthAddress { get; set; }
@@ -17,7 +16,6 @@
             return new InvestorSummaryMessage
             {
                 EmailTo = email,
-                Attempts = 0,
                 TokenAddress = tokenAddress,
                 RefundBtcAddress = refundBtcAddress,
                 RefundEthAddress = refundEthAddress,

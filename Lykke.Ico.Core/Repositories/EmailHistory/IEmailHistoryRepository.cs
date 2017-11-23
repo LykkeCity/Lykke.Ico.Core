@@ -7,7 +7,7 @@ namespace Lykke.Ico.Core.Repositories.EmailHistory
     {
         Task<IEnumerable<IEmailHistoryItem>> GetAsync(string email);
 
-        Task SaveAsync(string email, string subject, string body);
+        Task SaveAsync(string type, string email, string subject, string body);
 
         Task RemoveAsync(string email);
     }

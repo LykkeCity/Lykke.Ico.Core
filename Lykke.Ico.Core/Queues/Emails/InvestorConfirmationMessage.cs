@@ -6,7 +6,6 @@ namespace Lykke.Ico.Core.Queues.Emails
     public class InvestorConfirmationMessage : IInvestorMessage
     {
         public string EmailTo { get; set; }
-        public int Attempts { get; set; }
         public Guid ConfirmationToken { get; set; }
 
         public static InvestorConfirmationMessage Create(string email, Guid confirmationToken)
@@ -14,7 +13,6 @@ namespace Lykke.Ico.Core.Queues.Emails
             return new InvestorConfirmationMessage
             {
                 EmailTo = email,
-                Attempts = 0,
                 ConfirmationToken = confirmationToken
             };
         }

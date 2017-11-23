@@ -6,6 +6,7 @@ using AzureStorage.Tables;
 using Common.Log;
 using Lykke.SettingsReader;
 using System.Linq;
+using Common;
 
 namespace Lykke.Ico.Core.Repositories.EmailHistory
 {
@@ -13,7 +14,7 @@ namespace Lykke.Ico.Core.Repositories.EmailHistory
     {
         private readonly INoSQLTableStorage<EmailHistoryEntity> _table;
         private static string GetPartitionKey(string email) => email;
-        private static string GetRowKey() => DateTime.Now.ToString();
+        private static string GetRowKey() => DateTime.UtcNow.ToString("o");
 
         public EmailHistoryRepository(IReloadingManager<string> connectionStringManager, ILog log)
         {
@@ -25,12 +26,13 @@ namespace Lykke.Ico.Core.Repositories.EmailHistory
             return await _table.GetDataAsync(GetPartitionKey(email));
         }
 
-        public async Task SaveAsync(string email, string subject, string body)
+        public async Task SaveAsync(string type, string email, string subject, string body)
         {
-            await _table.InsertOrReplaceAsync(new EmailHistoryEntity
+            await _table.InsertAsync(new EmailHistoryEntity
             {
                 PartitionKey = GetPartitionKey(email),
                 RowKey = GetRowKey(),
+                Type = type,
                 Subject = subject,
                 Body = body
             });
