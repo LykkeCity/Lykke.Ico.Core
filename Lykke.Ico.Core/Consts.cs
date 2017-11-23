@@ -28,5 +28,13 @@
                 public const string InvestorNewTransaction = "investor-new-transaction.html";
             }
         }
+
+        public class Transactions
+        {
+            public class Queues
+            {
+                public const string BlockchainTransaction = "transaction-blockchain";
+            }
+        }
     }
 }
