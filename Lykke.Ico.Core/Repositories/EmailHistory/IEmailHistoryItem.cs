@@ -1,8 +1,12 @@
-﻿namespace Lykke.Ico.Core.Repositories.EmailHistory
+﻿using System;
+
+namespace Lykke.Ico.Core.Repositories.EmailHistory
 {
     public interface IEmailHistoryItem
     {
         string Email { get; }
+
+        DateTime WhenUtc { get; }
 
         string Type { get; }
 

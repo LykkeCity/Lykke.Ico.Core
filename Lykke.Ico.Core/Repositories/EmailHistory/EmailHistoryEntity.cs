@@ -1,5 +1,6 @@
 ﻿using Lykke.AzureStorage.Tables;
 using Microsoft.WindowsAzure.Storage.Table;
+using System;
 
 namespace Lykke.Ico.Core.Repositories.EmailHistory
 {
@@ -7,6 +8,9 @@ namespace Lykke.Ico.Core.Repositories.EmailHistory
     {
         [IgnoreProperty]
         public string Email { get => PartitionKey; }
+
+        [IgnoreProperty]
+        public DateTime WhenUtc { get => Timestamp.UtcDateTime; }
 
         public string Type { get; set; }
 

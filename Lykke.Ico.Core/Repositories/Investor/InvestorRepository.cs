@@ -58,8 +58,8 @@ namespace Lykke.Ico.Core.Repositories.Investor
                 x.PayInBtcPublicKey = investor.PayInBtcPublicKey;
                 x.PayInBtcAddress = investor.PayInBtcAddress;
                 x.ConfirmationToken = investor.ConfirmationToken;
-                x.ConfirmationDateTime = investor.ConfirmationDateTime;
-                x.Updated = DateTime.Now;
+                x.ConfirmationDateTimeUtc = investor.ConfirmationDateTimeUtc;
+                x.UpdatedUtc = DateTime.UtcNow;
 
                 return x;
             });

@@ -21,11 +21,11 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         public string RefundBtcAddress { get; set; }
 
-        public DateTime Updated { get; set; }
+        public DateTime UpdatedUtc { get; set; }
 
         public Guid? ConfirmationToken { get; set; }
 
-        public DateTime? ConfirmationDateTime { get; set; }
+        public DateTime? ConfirmationDateTimeUtc { get; set; }
 
         public static InvestorEntity Create(string email, Guid confirmationToken)
         {
@@ -33,8 +33,8 @@ namespace Lykke.Ico.Core.Repositories.Investor
             {
                 Email = email,
                 ConfirmationToken = confirmationToken,
-                ConfirmationDateTime = DateTime.Now,
-                Updated = DateTime.Now
+                ConfirmationDateTimeUtc = DateTime.UtcNow,
+                UpdatedUtc = DateTime.UtcNow
             };
         }
     }

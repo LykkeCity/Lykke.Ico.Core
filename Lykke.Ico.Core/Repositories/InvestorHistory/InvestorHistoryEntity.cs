@@ -1,5 +1,6 @@
 ﻿using Lykke.AzureStorage.Tables;
 using Microsoft.WindowsAzure.Storage.Table;
+using System;
 
 namespace Lykke.Ico.Core.Repositories.InvestorHistory
 {
@@ -9,7 +10,7 @@ namespace Lykke.Ico.Core.Repositories.InvestorHistory
         public string Email { get => PartitionKey; }
 
         [IgnoreProperty]
-        public string When { get => RowKey; }
+        public DateTime WhenUtc { get => Timestamp.UtcDateTime; }
 
         public InvestorHistoryAction Action { get; set; }
 
