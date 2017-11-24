@@ -7,6 +7,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using Lykke.Ico.Core.Repositories.AddressPoolHistory;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Lykke.Ico.Core.Repositories.AddressPool
 {
@@ -28,17 +29,11 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
         {
             lock (_lock)
             {
-                var query = new Microsoft.WindowsAzure.Storage.Table.TableQuery<AddressPoolEntity>().Take(1);
-                //var page = new AzureStorage.Tables.Paging.PagingInfo();
-                //var result = _table.ExecuteQueryWithPaginationAsync(query, page).Result;
-
-                var result = new List<AddressPoolEntity>();
-                _table.ExecuteAsync(query, entities =>
-                {
-                    result.AddRange(entities);
-                });
-
+                var query = new TableQuery<AddressPoolEntity>().Take(1);
+                var page = new AzureStorage.Tables.Paging.PagingInfo { ElementCount = 1 };
+                var result = _table.ExecuteQueryWithPaginationAsync(query, page).Result;
                 var entity = result.FirstOrDefault();
+
                 if (entity == null)
                 {
                     throw new Exception("There are no free addresses in address pool");
