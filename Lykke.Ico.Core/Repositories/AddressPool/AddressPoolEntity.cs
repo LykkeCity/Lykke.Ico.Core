@@ -6,14 +6,5 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
     {
         public string EthPublicKey { get; set; }
         public string BtcPublicKey { get; set; }
-
-        public static AddressPoolEntity Create(string ethPublicKey, string btcPublicKey)
-        {
-            return new AddressPoolEntity
-            {
-                EthPublicKey = ethPublicKey,
-                BtcPublicKey = btcPublicKey
-            };
-        }
     }
 }

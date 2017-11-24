@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Lykke.Ico.Core.Repositories.AddressPool
 {
     public interface IAddressPoolRepository
     {
-        Task<IAddressPoolItem> AddAsync(string ethPulicKey, string btcPublicKey);
+        Task AddAsync(string ethPulicKey, string btcPublicKey);
+
+        Task AddBatchAsync(List<IAddressPoolItem> keys);
 
         IAddressPoolItem GetNextFree(string email);
     }
