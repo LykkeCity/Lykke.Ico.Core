@@ -16,8 +16,7 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
         private static readonly Object _lock = new Object();
         private readonly INoSQLTableStorage<AddressPoolEntity> _table;
         private readonly IAddressPoolHistoryRepository _addressPoolHistoryRepository;
-        private static string GetPartitionKey() => "";
-        private static string GetRowKey() => (DateTime.MaxValue.Ticks - DateTime.UtcNow.Ticks).ToString("d19");
+        private static string GetRowKey(int id) => id.ToString().PadLeft(9, '0');
 
         public AddressPoolRepository(IReloadingManager<string> connectionStringManager, ILog log)
         {
@@ -46,25 +45,14 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
             }
         }
 
-        public async Task AddAsync(string ethPulicKey, string btcPublicKey)
-        {
-            await _table.InsertAsync(new AddressPoolEntity
-            {
-                EthPublicKey = ethPulicKey,
-                BtcPublicKey = btcPublicKey,
-                PartitionKey = GetPartitionKey(),
-                RowKey = GetRowKey()
-            });
-        }
-
         public async Task AddBatchAsync(List<IAddressPoolItem> keys)
         {
             var entities = keys.Select(f => new AddressPoolEntity
             {
                 BtcPublicKey = f.BtcPublicKey,
                 EthPublicKey = f.EthPublicKey,
-                PartitionKey = GetPartitionKey(),
-                RowKey = GetRowKey()
+                PartitionKey = "",
+                RowKey = GetRowKey(f.Id)
             });
 
             await _table.InsertOrMergeBatchAsync(entities);
