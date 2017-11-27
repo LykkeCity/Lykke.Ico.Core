@@ -18,7 +18,7 @@ namespace Lykke.Ico.Core.Repositories.ProcessedBlock
             _tableStorage = AzureTableStorage<ProcessedBlockEntity>.Create(connectionStringManager, "ProcessedBlocks", log);
         }
 
-        public async Task<int> GetLastProcessedBlockAsync(CurrencyType currencyType, string networkName = null)
+        public async Task<UInt64> GetLastProcessedBlockAsync(CurrencyType currencyType, string networkName = null)
         {
             var partitionKey = GetPartitionKey(currencyType);
             var rowKey = GetRowKey(networkName);
@@ -30,7 +30,7 @@ namespace Lykke.Ico.Core.Repositories.ProcessedBlock
                 return 0;
         }
 
-        public async Task SetLastProcessedBlockAsync(int height, CurrencyType currencyType, string networkName = null)
+        public async Task SetLastProcessedBlockAsync(UInt64 height, CurrencyType currencyType, string networkName = null)
         {
             await _tableStorage.InsertOrReplaceAsync(new ProcessedBlockEntity
             {

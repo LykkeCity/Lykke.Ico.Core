@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Lykke.Ico.Core.Repositories.ProcessedBlock
 {
     public interface IProcessedBlockRepository
     {
-        Task<int> GetLastProcessedBlockAsync(CurrencyType currencyType, string networkName = null);
+        Task<UInt64> GetLastProcessedBlockAsync(CurrencyType currencyType, string networkName = null);
 
-        Task SetLastProcessedBlockAsync(int height, CurrencyType currencyType, string networkName = null);
+        Task SetLastProcessedBlockAsync(UInt64 height, CurrencyType currencyType, string networkName = null);
     }
 }
