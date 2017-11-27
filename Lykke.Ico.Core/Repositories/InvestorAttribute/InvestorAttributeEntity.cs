@@ -1,4 +1,8 @@
-﻿using Microsoft.WindowsAzure.Storage.Table;
+﻿using System;
+using Lykke.AzureStorage.Tables;
+using Lykke.AzureStorage.Tables.Entity.Annotation;
+using Lykke.AzureStorage.Tables.Entity.ValueTypesMerging;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Lykke.Ico.Core.Repositories.InvestorAttribute
 {
