@@ -11,5 +11,6 @@ namespace Lykke.Ico.Core.Repositories.CampaignInfo
         void IncrementValue(CampaignInfoType type, double value);
         void IncrementValue(CampaignInfoType type, int value);
         void IncrementValue(CampaignInfoType type, decimal value);
+        void IncrementValue(CampaignInfoType type, ulong value);
     }
 }
