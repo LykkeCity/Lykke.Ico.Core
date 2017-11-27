@@ -1,9 +1,10 @@
-﻿using Lykke.AzureStorage.Tables;
+﻿using System;
+using Lykke.AzureStorage.Tables;
 
 namespace Lykke.Ico.Core.Repositories.ProcessedBlock
 {
     internal class ProcessedBlockEntity : AzureTableEntity
     {
-        public int Height { get; set; }
+        public UInt64 Height { get; set; }
     }
 }
