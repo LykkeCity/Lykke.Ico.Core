@@ -79,6 +79,16 @@ namespace Lykke.Ico.Core.Repositories.CampaignInfo
             }
         }
 
+        public void IncrementValue(CampaignInfoType type, ulong value)
+        {
+            lock (_lock)
+            {
+                var currentValue = GetValueULongAsync(type).Result;
+
+                SaveValueAsync(type, ((currentValue ?? 0) + value).ToString()).Wait();
+            }
+        }
+
         private async Task<int?> GetValueIntAsync(CampaignInfoType type)
         {
             var valueStr = await GetValueAsync(type);
@@ -110,6 +120,17 @@ namespace Lykke.Ico.Core.Repositories.CampaignInfo
             }
 
             return Decimal.Parse(valueStr);
+        }
+
+        private async Task<ulong?> GetValueULongAsync(CampaignInfoType type)
+        {
+            var valueStr = await GetValueAsync(type);
+            if (string.IsNullOrEmpty(valueStr))
+            {
+                return null;
+            }
+
+            return UInt64.Parse(valueStr);
         }
     }
 }
