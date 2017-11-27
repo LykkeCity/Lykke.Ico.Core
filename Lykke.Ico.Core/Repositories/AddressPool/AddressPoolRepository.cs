@@ -31,14 +31,14 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
                 var query = new TableQuery<AddressPoolEntity>().Take(1);
                 var page = new AzureStorage.Tables.Paging.PagingInfo { ElementCount = 1 };
                 var result = _table.ExecuteQueryWithPaginationAsync(query, page).Result;
-                var entity = result.FirstOrDefault();
 
+                var entity = result.FirstOrDefault();
                 if (entity == null)
                 {
                     throw new Exception("There are no free addresses in address pool");
                 }
 
-                _addressPoolHistoryRepository.SaveAsync(entity, email);
+                _addressPoolHistoryRepository.SaveAsync(entity, email).Wait();
                 _table.DeleteAsync(entity).Wait();
 
                 return entity;
