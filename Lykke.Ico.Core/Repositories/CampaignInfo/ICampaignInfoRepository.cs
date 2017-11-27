@@ -8,9 +8,9 @@ namespace Lykke.Ico.Core.Repositories.CampaignInfo
         Task<Dictionary<string, string>> GetAllAsync();
         Task<string> GetValueAsync(CampaignInfoType type);
         Task SaveValueAsync(CampaignInfoType type, string value);
-        void IncrementValue(CampaignInfoType type, double value);
-        void IncrementValue(CampaignInfoType type, int value);
-        void IncrementValue(CampaignInfoType type, decimal value);
-        void IncrementValue(CampaignInfoType type, ulong value);
+        Task IncrementValue(CampaignInfoType type, double value);
+        Task IncrementValue(CampaignInfoType type, int value);
+        Task IncrementValue(CampaignInfoType type, decimal value);
+        Task IncrementValue(CampaignInfoType type, ulong value);
     }
 }

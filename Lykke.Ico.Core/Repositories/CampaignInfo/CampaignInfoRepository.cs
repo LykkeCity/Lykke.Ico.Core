@@ -49,7 +49,7 @@ namespace Lykke.Ico.Core.Repositories.CampaignInfo
             await _table.InsertOrMergeAsync(entity);
         }
 
-        public void IncrementValue(CampaignInfoType type, int value)
+        public Task IncrementValue(CampaignInfoType type, int value)
         {
             lock (_lock)
             {
@@ -57,9 +57,11 @@ namespace Lykke.Ico.Core.Repositories.CampaignInfo
 
                 SaveValueAsync(type, ((currentValue ?? 0) + value).ToString()).Wait();
             }
+
+            return Task.CompletedTask;
         }
 
-        public void IncrementValue(CampaignInfoType type, double value)
+        public Task IncrementValue(CampaignInfoType type, double value)
         {
             lock (_lock)
             {
@@ -67,9 +69,11 @@ namespace Lykke.Ico.Core.Repositories.CampaignInfo
 
                 SaveValueAsync(type, ((currentValue ?? 0) + value).ToString()).Wait();
             }
+
+            return Task.CompletedTask;
         }
 
-        public void IncrementValue(CampaignInfoType type, decimal value)
+        public Task IncrementValue(CampaignInfoType type, decimal value)
         {
             lock (_lock)
             {
@@ -77,9 +81,11 @@ namespace Lykke.Ico.Core.Repositories.CampaignInfo
 
                 SaveValueAsync(type, ((currentValue ?? 0) + value).ToString()).Wait();
             }
+
+            return Task.CompletedTask;
         }
 
-        public void IncrementValue(CampaignInfoType type, ulong value)
+        public Task IncrementValue(CampaignInfoType type, ulong value)
         {
             lock (_lock)
             {
@@ -87,6 +93,8 @@ namespace Lykke.Ico.Core.Repositories.CampaignInfo
 
                 SaveValueAsync(type, ((currentValue ?? 0) + value).ToString()).Wait();
             }
+
+            return Task.CompletedTask;
         }
 
         private async Task<int?> GetValueIntAsync(CampaignInfoType type)

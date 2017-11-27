@@ -24,8 +24,10 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
             _addressPoolHistoryRepository = new AddressPoolHistoryRepository(connectionStringManager, log);
         }
 
-        public IAddressPoolItem GetNextFree(string email)
+        public async Task<IAddressPoolItem> GetNextFree(string email)
         {
+            await Task.Yield();
+
             lock (_lock)
             {
                 var query = new TableQuery<AddressPoolEntity>().Take(1);
@@ -42,7 +44,7 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
                 _table.DeleteAsync(entity).Wait();
 
                 return entity;
-            }
+            }            
         }
 
         public async Task AddBatchAsync(List<IAddressPoolItem> keys)
