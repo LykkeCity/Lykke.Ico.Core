@@ -7,6 +7,8 @@ namespace Lykke.Ico.Core.Queues.Transactions
     [QueueMessage(QueueName = Consts.Transactions.Queues.BlockchainTransaction)]
     public class BlockchainTransactionMessage : IMessage
     {
+        public string NetworkName { get; set; }
+
         /// <summary>
         /// Block hash
         /// </summary>
