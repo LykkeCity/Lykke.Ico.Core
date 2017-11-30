@@ -25,28 +25,21 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
             return await _tableStorage.GetDataAsync(GetPartitionKey(investorEmail));
         }
 
-        public async Task SaveAsync(
-            string investorEmail,
-            string txId,
-            string blockId,
-            DateTimeOffset blockTimestamp,
-            string destinationAddress,
-            CurrencyType currencyType,
-            decimal amount,
-            decimal exchangeRate,
-            decimal amountUsd)
+        public async Task SaveAsync(ICryptoInvestment entity)
         {
             await _tableStorage.InsertOrReplaceAsync(new CryptoInvestmentEntity
             {
-                PartitionKey = GetPartitionKey(investorEmail),
-                RowKey = GetRowKey(txId),
-                BlockId = blockId,
-                BlockTimestamp = blockTimestamp,
-                DestinationAddress = destinationAddress,
-                CurrencyType = currencyType,
-                Amount = amount,
-                ExchangeRate = exchangeRate,
-                AmountUsd = amountUsd
+                PartitionKey = GetPartitionKey(entity.InvestorEmail),
+                RowKey = GetRowKey(entity.TransactionId),
+                BlockId = entity.BlockId,
+                BlockTimestamp = entity.BlockTimestamp,
+                DestinationAddress = entity.DestinationAddress,
+                CurrencyType = entity.CurrencyType,
+                Amount = entity.Amount,
+                ExchangeRate = entity.ExchangeRate,
+                AmountUsd = entity.AmountUsd,
+                Price = entity.Price,
+                Quantity = entity.Quantity
             });
         }
     }

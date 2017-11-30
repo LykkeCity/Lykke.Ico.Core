@@ -15,5 +15,7 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
         decimal Amount { get; set; }
         decimal ExchangeRate { get; set; }
         decimal AmountUsd { get; set; }
+        decimal Price { get; set; }
+        decimal Quantity { get; set; }
     }
 }
