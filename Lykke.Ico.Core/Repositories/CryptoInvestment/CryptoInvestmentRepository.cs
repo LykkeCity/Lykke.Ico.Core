@@ -39,7 +39,7 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
                 ExchangeRate = entity.ExchangeRate,
                 AmountUsd = entity.AmountUsd,
                 Price = entity.Price,
-                Quantity = entity.Quantity
+                AmountVld = entity.AmountVld
             });
         }
     }
