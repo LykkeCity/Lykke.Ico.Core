@@ -1,8 +1,11 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
 using System;
+using Lykke.AzureStorage.Tables.Entity.Annotation;
+using Lykke.AzureStorage.Tables.Entity.ValueTypesMerging;
 
 namespace Lykke.Ico.Core.Repositories.Investor
 {
+    [ValueTypeMergingStrategy(ValueTypeMergingStrategy.UpdateAlways)]
     internal class InvestorEntity : TableEntity, IInvestor
     {
         public string Email { get; set; }
