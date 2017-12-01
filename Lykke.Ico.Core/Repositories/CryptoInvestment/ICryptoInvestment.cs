@@ -18,5 +18,6 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
         decimal Price { get; set; }
         decimal AmountVld { get; set; }
         string Context { get; set; }
+        DateTimeOffset? EmailSent { get; set; }
     }
 }

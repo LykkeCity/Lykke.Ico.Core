@@ -9,5 +9,7 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
         Task<IEnumerable<ICryptoInvestment>> GetInvestmentsAsync(string investorEmail);
 
         Task SaveAsync(ICryptoInvestment entity);
+
+        Task SaveEmailSentTimestampAsync(string investorEmail, string txId);
     }
 }
