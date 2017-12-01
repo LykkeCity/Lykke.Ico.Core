@@ -43,17 +43,5 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
                 Context = entity.Context
             });
         }
-
-        public async Task SaveEmailTimestampAsync(string investorEmail, string txId, DateTime? timestamp = null)
-        {
-            var partitionKey = GetPartitionKey(investorEmail);
-            var rowKey = GetRowKey(txId);
-
-            await _tableStorage.MergeAsync(partitionKey, rowKey, e =>
-            {
-                e.EmailTimestamp = timestamp ?? DateTime.UtcNow;
-                return e;
-            });
-        }
     }
 }
