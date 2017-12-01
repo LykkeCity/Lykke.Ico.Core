@@ -51,7 +51,7 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
 
             await _tableStorage.MergeAsync(partitionKey, rowKey, e =>
             {
-                e.EmailTimestamp = timestamp ?? DateTime.Now.ToUniversalTime();
+                e.EmailTimestamp = timestamp ?? DateTime.UtcNow;
                 return e;
             });
         }
