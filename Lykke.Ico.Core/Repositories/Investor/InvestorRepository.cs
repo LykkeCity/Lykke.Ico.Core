@@ -72,5 +72,28 @@ namespace Lykke.Ico.Core.Repositories.Investor
             await _table.DeleteIfExistAsync(GetPartitionKey(), GetRowKey(email));
             await _investorHistoryRepository.RemoveAsync(email);
         }
+
+        public async Task UpdateAsync(string email, string kycProcessId = null, string kycResult = null, bool? kycSucceeded = null,
+            decimal? amountBtc = null,
+            decimal? amountEth = null,
+            decimal? amountUsd = null,
+            decimal? amountVld = null)
+        {
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.KycProcessId = kycProcessId ?? x.KycProcessId;
+                x.KycSucceeded = kycSucceeded ?? x.KycSucceeded;
+                x.KycResult = kycResult ?? x.KycResult;
+                x.AmountBtc = amountBtc ?? x.AmountBtc;
+                x.AmountEth = amountEth ?? x.AmountEth;
+                x.AmountUsd = amountUsd ?? x.AmountUsd;
+                x.AmountVld = amountVld ?? x.AmountVld;
+                x.UpdatedUtc = DateTime.UtcNow;
+
+                return x;
+            });
+
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
+        }
     }
 }

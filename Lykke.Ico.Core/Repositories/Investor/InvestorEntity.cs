@@ -27,6 +27,20 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         public DateTime? ConfirmationDateTimeUtc { get; set; }
 
+        public string KycProcessId { get; set; }
+
+        public string KycResult { get; set; }
+
+        public bool? KycSucceeded { get; set; }
+
+        public decimal AmountBtc { get; set; }
+
+        public decimal AmountEth { get; set; }
+
+        public decimal AmountUsd { get; set; }
+
+        public decimal AmountVld { get; set; }
+
         public static InvestorEntity Create(string email, Guid confirmationToken)
         {
             return new InvestorEntity
