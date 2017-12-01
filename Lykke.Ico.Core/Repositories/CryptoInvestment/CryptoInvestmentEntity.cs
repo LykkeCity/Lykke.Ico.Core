@@ -22,7 +22,7 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
         }
 
         public string BlockId { get; set; }
-        public DateTimeOffset BlockTimestamp { get; set; }
+        public DateTime BlockTimestamp { get; set; }
         public string DestinationAddress { get; set; }
         public CurrencyType CurrencyType { get; set; }
         public decimal Amount { get; set; }
@@ -31,6 +31,6 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
         public decimal Price { get; set; }
         public decimal AmountVld { get; set; }
         public string Context { get; set; }
-        public DateTimeOffset? EmailSent { get; set; }
+        public DateTime? EmailTimestamp { get; set; }
     }
 }

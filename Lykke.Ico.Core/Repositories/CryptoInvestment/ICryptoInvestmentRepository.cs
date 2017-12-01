@@ -10,6 +10,6 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
 
         Task SaveAsync(ICryptoInvestment entity);
 
-        Task SaveEmailSentTimestampAsync(string investorEmail, string txId);
+        Task SaveEmailTimestampAsync(string investorEmail, string txId, DateTime? timestamp = null);
     }
 }
