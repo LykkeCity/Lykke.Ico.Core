@@ -7,6 +7,11 @@ namespace Lykke.Ico.Core.Queues.Transactions
     [QueueMessage(QueueName = Consts.Transactions.Queues.BlockchainTransaction)]
     public class BlockchainTransactionMessage : IMessage
     {
+        public string InvestorEmail { get; set; }
+
+        /// <summary>
+        /// URL to blockchain explorer for transaction
+        /// </summary>
         public string Link { get; set; }
 
         /// <summary>
