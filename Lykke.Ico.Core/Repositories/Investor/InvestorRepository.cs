@@ -77,7 +77,6 @@ namespace Lykke.Ico.Core.Repositories.Investor
         public async Task RemoveAsync(string email)
         {
             await _table.DeleteIfExistAsync(GetPartitionKey(), GetRowKey(email));
-            await _investorHistoryRepository.RemoveAsync(email);
         }
     }
 }

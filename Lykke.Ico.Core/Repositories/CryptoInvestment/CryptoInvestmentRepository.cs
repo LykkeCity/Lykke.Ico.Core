@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AzureStorage;
 using AzureStorage.Tables;
@@ -18,6 +16,11 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
         public CryptoInvestmentRepository(IReloadingManager<string> connectionStringManager, ILog log)
         {
             _tableStorage = AzureTableStorage<CryptoInvestmentEntity>.Create(connectionStringManager, "CryptoInvestments", log);
+        }
+
+        public async Task<ICryptoInvestment> GetInvestmentAsync(string investorEmail, string transactionId)
+        {
+            return await _tableStorage.GetDataAsync(GetPartitionKey(investorEmail), GetRowKey(transactionId));
         }
 
         public async Task<IEnumerable<ICryptoInvestment>> GetInvestmentsAsync(string investorEmail)
@@ -42,6 +45,13 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
                 AmountVld = entity.AmountVld,
                 Context = entity.Context
             });
+        }
+
+        public async Task RemoveAsync(string email)
+        {
+            var items = await _tableStorage.GetDataAsync(GetPartitionKey(email));
+            
+            await _tableStorage.DeleteAsync(items);
         }
     }
 }
