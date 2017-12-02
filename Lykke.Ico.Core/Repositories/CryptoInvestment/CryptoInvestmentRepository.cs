@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using AzureStorage;
 using AzureStorage.Tables;
 using Common.Log;
@@ -18,14 +19,16 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
             _tableStorage = AzureTableStorage<CryptoInvestmentEntity>.Create(connectionStringManager, "CryptoInvestments", log);
         }
 
-        public async Task<ICryptoInvestment> GetInvestmentAsync(string investorEmail, string transactionId)
+        public async Task<ICryptoInvestment> GetAsync(string email, string transactionId)
         {
-            return await _tableStorage.GetDataAsync(GetPartitionKey(investorEmail), GetRowKey(transactionId));
+            return await _tableStorage.GetDataAsync(GetPartitionKey(email), GetRowKey(transactionId));
         }
 
-        public async Task<IEnumerable<ICryptoInvestment>> GetInvestmentsAsync(string investorEmail)
+        public async Task<IEnumerable<ICryptoInvestment>> GetByEmailAsync(string email)
         {
-            return await _tableStorage.GetDataAsync(GetPartitionKey(investorEmail));
+            var entities = await _tableStorage.GetDataAsync(GetPartitionKey(email));
+
+            return entities.OrderBy(f => f.BlockTimestamp);
         }
 
         public async Task SaveAsync(ICryptoInvestment entity)

@@ -5,9 +5,9 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
 {
     public interface ICryptoInvestmentRepository
     {
-        Task<ICryptoInvestment> GetInvestmentAsync(string investorEmail, string transactionId);
+        Task<ICryptoInvestment> GetAsync(string email, string transactionId);
 
-        Task<IEnumerable<ICryptoInvestment>> GetInvestmentsAsync(string investorEmail);
+        Task<IEnumerable<ICryptoInvestment>> GetByEmailAsync(string email);
 
         Task SaveAsync(ICryptoInvestment entity);
 
