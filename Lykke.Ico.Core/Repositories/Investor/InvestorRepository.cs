@@ -11,7 +11,6 @@ namespace Lykke.Ico.Core.Repositories.Investor
 {
     public class InvestorRepository : IInvestorRepository
     {
-        private static readonly Object _lock = new Object();
         private readonly INoSQLTableStorage<InvestorEntity> _table;
         private static string GetPartitionKey() => "Investor";
         private static string GetRowKey(string email) => email;
