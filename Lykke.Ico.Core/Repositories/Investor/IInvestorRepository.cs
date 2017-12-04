@@ -23,6 +23,10 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         Task IncrementFiat(string email, decimal amountFiat, decimal amountUsd, decimal amountVld);
 
+        Task SaveKycAsync(string email, string kycRequestId);
+
+        Task SaveKycResultAsync(string email, bool kycPassed);
+
         Task RemoveAsync(string email);
     }
 }
