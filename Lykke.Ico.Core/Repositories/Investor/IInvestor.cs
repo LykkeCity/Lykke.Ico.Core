@@ -4,7 +4,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
 {
     public interface IInvestor
     {
-        string Email { get; set; }
+        string Email { get; }
 
         string TokenAddress { get; set; }
 
@@ -24,17 +24,23 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         Guid? ConfirmationToken { get; set; }
 
-        DateTime? ConfirmationDateTimeUtc { get; set; }
+        DateTime? ConfirmationTokenCreatedUtc { get; set; }
 
-        string KycProcessId { get; set; }
+        DateTime? ConfirmedUtc { get; set; }
 
-        string KycResult { get; set; }
+        string KycRequestId { get; set; }
 
-        bool? KycSucceeded { get; set; }
+        DateTime? KycRequestedUtc { get; set; }
+
+        bool? KycPassed { get; set; }
+
+        DateTime? KycPassedUtc { get; set; }
 
         decimal AmountBtc { get; set; }
 
         decimal AmountEth { get; set; }
+
+         decimal AmountFiat { get; set; }
 
         decimal AmountUsd { get; set; }
 

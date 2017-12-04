@@ -11,6 +11,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
 {
     public class InvestorRepository : IInvestorRepository
     {
+        private static readonly Object _lock = new Object();
         private readonly INoSQLTableStorage<InvestorEntity> _table;
         private static string GetPartitionKey() => "Investor";
         private static string GetRowKey(string email) => email;
@@ -35,10 +36,14 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         public async Task<IInvestor> AddAsync(string email, Guid confirmationToken)
         {
-            var entity = InvestorEntity.Create(email, confirmationToken);
-
-            entity.PartitionKey = GetPartitionKey();
-            entity.RowKey = GetRowKey(email);
+            var entity = new InvestorEntity
+            {
+                PartitionKey = GetPartitionKey(),
+                RowKey = GetRowKey(email),
+                ConfirmationToken = confirmationToken,
+                ConfirmationTokenCreatedUtc = DateTime.UtcNow,
+                UpdatedUtc = DateTime.UtcNow
+            };
 
             await _table.InsertAsync(entity);
             await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Create);
@@ -46,26 +51,104 @@ namespace Lykke.Ico.Core.Repositories.Investor
             return entity;
         }
 
-        public async Task UpdateAsync(IInvestor investor)
+        public async Task ConfirmAsync(string email)
         {
-            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(investor.Email), x =>
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
             {
-                x.TokenAddress = investor.TokenAddress;
-                x.RefundEthAddress = investor.RefundEthAddress;
-                x.RefundBtcAddress = investor.RefundBtcAddress;
-                x.PayInEthPublicKey = investor.PayInEthPublicKey;
-                x.PayInEthAddress = investor.PayInEthAddress;
-                x.PayInBtcPublicKey = investor.PayInBtcPublicKey;
-                x.PayInBtcAddress = investor.PayInBtcAddress;
-                x.ConfirmationToken = investor.ConfirmationToken;
-                x.ConfirmationDateTimeUtc = investor.ConfirmationDateTimeUtc;
-                x.KycProcessId = investor.KycProcessId;
-                x.KycSucceeded = investor.KycSucceeded;
-                x.KycResult = investor.KycResult;
-                x.AmountBtc = investor.AmountBtc;
-                x.AmountEth = investor.AmountEth;
-                x.AmountUsd = investor.AmountUsd;
-                x.AmountVld = investor.AmountVld;
+                x.ConfirmedUtc = DateTime.UtcNow;
+                x.UpdatedUtc = DateTime.UtcNow;
+
+                return x;
+            });
+
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
+        }
+
+        public async Task SaveAddressesAsync(string email, string tokenAddress, string refundEthAddress, string refundBtcAddress,
+           string payInEthPublicKey, string payInEthAddress, string payInBtcPublicKey, string payInBtcAddress)
+        {
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.TokenAddress = tokenAddress;
+                x.RefundEthAddress = refundEthAddress;
+                x.RefundBtcAddress = refundBtcAddress;
+                x.PayInEthPublicKey = payInEthPublicKey;
+                x.PayInEthAddress = payInEthAddress;
+                x.PayInBtcPublicKey = payInBtcPublicKey;
+                x.PayInBtcAddress = payInBtcAddress;
+                x.UpdatedUtc = DateTime.UtcNow;
+
+                return x;
+            });
+
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
+        }
+
+        public async Task SaveKycAsync(string email, string kycRequestId)
+        {
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.KycRequestId = kycRequestId;
+                x.KycRequestedUtc = DateTime.UtcNow;
+                x.UpdatedUtc = DateTime.UtcNow;
+
+                return x;
+            });
+
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
+        }
+
+        public async Task SaveKycResultAsync(string email, bool kycPassed)
+        {
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.KycPassed = kycPassed;
+                x.KycPassedUtc = DateTime.UtcNow;
+                x.UpdatedUtc = DateTime.UtcNow;
+
+                return x;
+            });
+
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
+        }
+
+        public async Task IncrementBtc(string email, decimal amountBtc, decimal amountUsd, decimal amountVld)
+        {
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.AmountBtc += amountBtc;
+                x.AmountUsd += amountUsd;
+                x.AmountVld = amountVld;
+                x.UpdatedUtc = DateTime.UtcNow;
+
+                return x;
+            });
+
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
+        }
+
+        public async Task IncrementEth(string email, decimal amountEth, decimal amountUsd, decimal amountVld)
+        {
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.AmountEth += amountEth;
+                x.AmountUsd += amountUsd;
+                x.AmountVld = amountVld;
+                x.UpdatedUtc = DateTime.UtcNow;
+
+                return x;
+            });
+
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
+        }
+
+        public async Task IncrementFiat(string email, decimal amountFiat, decimal amountUsd, decimal amountVld)
+        {
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.AmountFiat += amountFiat;
+                x.AmountUsd += amountUsd;
+                x.AmountVld = amountVld;
                 x.UpdatedUtc = DateTime.UtcNow;
 
                 return x;

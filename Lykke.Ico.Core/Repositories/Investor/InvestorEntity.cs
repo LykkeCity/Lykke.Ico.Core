@@ -2,13 +2,18 @@
 using Lykke.AzureStorage.Tables;
 using Lykke.AzureStorage.Tables.Entity.Annotation;
 using Lykke.AzureStorage.Tables.Entity.ValueTypesMerging;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Lykke.Ico.Core.Repositories.Investor
 {
     [ValueTypeMergingStrategy(ValueTypeMergingStrategy.UpdateAlways)]
     internal class InvestorEntity : AzureTableEntity, IInvestor
     {
-        public string Email { get; set; }
+        [IgnoreProperty]
+        public string Email
+        {
+            get => RowKey;
+        }
 
         public string TokenAddress { get; set; }
 
@@ -28,31 +33,26 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         public Guid? ConfirmationToken { get; set; }
 
-        public DateTime? ConfirmationDateTimeUtc { get; set; }
+        public DateTime? ConfirmationTokenCreatedUtc { get; set; }
 
-        public string KycProcessId { get; set; }
+        public DateTime? ConfirmedUtc { get; set; }
 
-        public string KycResult { get; set; }
+        public string KycRequestId { get; set; }
 
-        public bool? KycSucceeded { get; set; }
+        public DateTime? KycRequestedUtc { get; set; }
+
+        public bool? KycPassed { get; set; }
+
+        public DateTime? KycPassedUtc { get; set; }
 
         public decimal AmountBtc { get; set; }
 
         public decimal AmountEth { get; set; }
 
+        public decimal AmountFiat { get; set; }
+
         public decimal AmountUsd { get; set; }
 
         public decimal AmountVld { get; set; }
-
-        public static InvestorEntity Create(string email, Guid confirmationToken)
-        {
-            return new InvestorEntity
-            {
-                Email = email,
-                ConfirmationToken = confirmationToken,
-                ConfirmationDateTimeUtc = DateTime.UtcNow,
-                UpdatedUtc = DateTime.UtcNow
-            };
-        }
     }
 }
