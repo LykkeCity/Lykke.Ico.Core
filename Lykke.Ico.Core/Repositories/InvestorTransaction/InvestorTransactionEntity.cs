@@ -7,29 +7,30 @@ using Microsoft.WindowsAzure.Storage.Table;
 namespace Lykke.Ico.Core.Repositories.CryptoInvestment
 {
     [ValueTypeMergingStrategy(ValueTypeMergingStrategy.UpdateAlways)]
-    internal class CryptoInvestmentEntity : AzureTableEntity, ICryptoInvestment
+    internal class InvestorTransactionEntity : AzureTableEntity, IInvestorTransaction
     {
         [IgnoreProperty]
-        public string InvestorEmail
+        public string Email
         {
             get => PartitionKey;
         }
 
         [IgnoreProperty]
-        public string TransactionId
+        public string InternalId
         {
             get => RowKey;
         }
 
+        public DateTime CreatedUtc { get; set; }
+        public CurrencyType Currency { get; set; }
         public string BlockId { get; set; }
-        public DateTime BlockTimestamp { get; set; }
-        public string DestinationAddress { get; set; }
-        public CurrencyType CurrencyType { get; set; }
+        public string Transaction { get; set; }
+        public string PayInAddress { get; set; }
         public decimal Amount { get; set; }
-        public decimal ExchangeRate { get; set; }
         public decimal AmountUsd { get; set; }
-        public decimal Price { get; set; }
-        public decimal AmountVld { get; set; }
-        public string Context { get; set; }
+        public decimal AmountToken { get; set; }
+        public decimal TokenPrice { get; set; }
+        public decimal ExchangeRate { get; set; }
+        public string ExchangeRateContext { get; set; }
     }
 }

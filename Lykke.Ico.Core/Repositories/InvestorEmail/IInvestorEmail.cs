@@ -2,7 +2,7 @@
 
 namespace Lykke.Ico.Core.Repositories.EmailHistory
 {
-    public interface IEmailHistoryItem
+    public interface IInvestorEmail
     {
         string Email { get; }
 
