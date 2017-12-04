@@ -16,7 +16,7 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
         }
 
         [IgnoreProperty]
-        public string InternalId
+        public string TransactionId
         {
             get => RowKey;
         }

@@ -5,7 +5,7 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
     public interface IInvestorTransaction
     {
         string Email { get; }
-        string InternalId { get; }
+        string TransactionId { get; }
         DateTime CreatedUtc { get; set; }
         CurrencyType Currency { get; set; }
         string BlockId { get; set; }

@@ -36,7 +36,7 @@ namespace Lykke.Ico.Core.Repositories.CryptoInvestment
             await _tableStorage.InsertOrReplaceAsync(new InvestorTransactionEntity
             {
                 PartitionKey = GetPartitionKey(entity.Email),
-                RowKey = GetRowKey(entity.InternalId),
+                RowKey = GetRowKey(entity.TransactionId),
                 CreatedUtc = entity.CreatedUtc,
                 Currency = entity.Currency,
                 BlockId = entity.BlockId,
