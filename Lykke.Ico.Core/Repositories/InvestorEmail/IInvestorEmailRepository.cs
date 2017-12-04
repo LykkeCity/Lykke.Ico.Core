@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Lykke.Ico.Core.Repositories.EmailHistory
+namespace Lykke.Ico.Core.Repositories.InvestorEmail
 {
     public  interface IInvestorEmailRepository
     {

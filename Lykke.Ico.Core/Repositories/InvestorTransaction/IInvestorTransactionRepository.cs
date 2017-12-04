@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Lykke.Ico.Core.Repositories.CryptoInvestment
-{
+namespace Lykke.Ico.Core.Repositories.InvestorTransaction
+{ 
     public interface IInvestorTransactionRepository
     {
         Task<IInvestorTransaction> GetAsync(string email, string transactionId);

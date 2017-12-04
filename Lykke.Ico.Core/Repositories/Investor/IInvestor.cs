@@ -44,6 +44,6 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         decimal AmountUsd { get; set; }
 
-        decimal AmountVld { get; set; }
+        decimal AmountToken { get; set; }
     }
 }

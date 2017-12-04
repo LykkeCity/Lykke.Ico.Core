@@ -4,7 +4,7 @@ using Lykke.AzureStorage.Tables.Entity.Annotation;
 using Lykke.AzureStorage.Tables.Entity.ValueTypesMerging;
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace Lykke.Ico.Core.Repositories.CryptoInvestment
+namespace Lykke.Ico.Core.Repositories.InvestorTransaction
 {
     [ValueTypeMergingStrategy(ValueTypeMergingStrategy.UpdateAlways)]
     internal class InvestorTransactionEntity : AzureTableEntity, IInvestorTransaction

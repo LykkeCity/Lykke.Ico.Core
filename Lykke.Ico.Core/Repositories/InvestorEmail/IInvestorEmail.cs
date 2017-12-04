@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lykke.Ico.Core.Repositories.EmailHistory
+namespace Lykke.Ico.Core.Repositories.InvestorEmail
 {
     public interface IInvestorEmail
     {

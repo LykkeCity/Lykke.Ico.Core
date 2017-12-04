@@ -2,7 +2,7 @@
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
 
-namespace Lykke.Ico.Core.Repositories.EmailHistory
+namespace Lykke.Ico.Core.Repositories.InvestorEmail
 {
     public class InvestorEmailEntity : AzureTableEntity, IInvestorEmail
     {

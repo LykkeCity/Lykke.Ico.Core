@@ -6,7 +6,7 @@
         AmountInvestedBtc,
         AmountInvestedEth,
         AmountInvestedUsd,
-        AmountInvestedVld,
+        AmountInvestedToken,
         AddressPoolTotalSize,
         AddressPoolCurrentSize,
         LastProcessedBlockBtc,

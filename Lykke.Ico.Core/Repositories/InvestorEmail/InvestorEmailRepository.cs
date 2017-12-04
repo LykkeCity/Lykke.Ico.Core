@@ -7,7 +7,7 @@ using Common.Log;
 using Lykke.SettingsReader;
 using System.Linq;
 
-namespace Lykke.Ico.Core.Repositories.EmailHistory
+namespace Lykke.Ico.Core.Repositories.InvestorEmail
 {
     public class InvestorEmailRepository : IInvestorEmailRepository
     {

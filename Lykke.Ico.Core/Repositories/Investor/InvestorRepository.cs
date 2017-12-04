@@ -111,43 +111,25 @@ namespace Lykke.Ico.Core.Repositories.Investor
             await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
         }
 
-        public async Task IncrementBtc(string email, decimal amountBtc, decimal amountUsd, decimal amountVld)
+        public async Task IncrementAmount(string email, CurrencyType type, decimal amount, decimal amountUsd, decimal amountToken)
         {
             var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
             {
-                x.AmountBtc += amountBtc;
+                switch (type)
+                {
+                    case CurrencyType.Bitcoin:
+                        x.AmountBtc += amount;
+                        break;
+                    case CurrencyType.Ether:
+                        x.AmountEth += amount;
+                        break;
+                    case CurrencyType.Fiat:
+                        x.AmountFiat += amount;
+                        break;
+                }
+
                 x.AmountUsd += amountUsd;
-                x.AmountVld = amountVld;
-                x.UpdatedUtc = DateTime.UtcNow;
-
-                return x;
-            });
-
-            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
-        }
-
-        public async Task IncrementEth(string email, decimal amountEth, decimal amountUsd, decimal amountVld)
-        {
-            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
-            {
-                x.AmountEth += amountEth;
-                x.AmountUsd += amountUsd;
-                x.AmountVld = amountVld;
-                x.UpdatedUtc = DateTime.UtcNow;
-
-                return x;
-            });
-
-            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
-        }
-
-        public async Task IncrementFiat(string email, decimal amountFiat, decimal amountUsd, decimal amountVld)
-        {
-            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
-            {
-                x.AmountFiat += amountFiat;
-                x.AmountUsd += amountUsd;
-                x.AmountVld = amountVld;
+                x.AmountToken = amountToken;
                 x.UpdatedUtc = DateTime.UtcNow;
 
                 return x;
