@@ -6,6 +6,6 @@ namespace Lykke.Ico.Core.Queues.Emails
     public class InvestorConfirmationMessage : IInvestorMessage
     {
         public string EmailTo { get; set; }
-        public Guid ConfirmationToken { get; set; }
+        public string ConfirmationLink { get; set; }
     }
 }
