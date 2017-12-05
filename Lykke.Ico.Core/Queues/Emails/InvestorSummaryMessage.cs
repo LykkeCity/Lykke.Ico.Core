@@ -9,19 +9,7 @@
         public string RefundEthAddress { get; set; }
         public string PayInBtcAddress { get; set; }
         public string PayInEthAddress { get; set; }
-
-        public static InvestorSummaryMessage Create(string email, string tokenAddress, string refundBtcAddress,
-            string refundEthAddress, string payInBtcAddress, string payInEthAddress)
-        {
-            return new InvestorSummaryMessage
-            {
-                EmailTo = email,
-                TokenAddress = tokenAddress,
-                RefundBtcAddress = refundBtcAddress,
-                RefundEthAddress = refundEthAddress,
-                PayInBtcAddress = payInBtcAddress,
-                PayInEthAddress = payInEthAddress
-            };
-        }
+        public string LinkEthAddress { get; set; }
+        public string LinkBtcAddress { get; set; }
     }
 }   
