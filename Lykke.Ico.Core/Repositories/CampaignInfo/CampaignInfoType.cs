@@ -2,6 +2,7 @@
 {
     public enum CampaignInfoType
     {
+        MinInvestAmountUsd,
         AmountInvestedFiat,
         AmountInvestedBtc,
         AmountInvestedEth,
