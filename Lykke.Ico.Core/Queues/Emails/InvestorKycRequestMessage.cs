@@ -4,6 +4,6 @@
     public class InvestorKycRequestMessage : IInvestorMessage
     {
         public string EmailTo { get; set; }
-        public string KycId { get; set; }
+        public string KycLink { get; set; }
     }
 }
