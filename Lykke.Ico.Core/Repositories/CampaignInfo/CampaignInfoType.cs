@@ -2,6 +2,11 @@
 {
     public enum CampaignInfoType
     {
+        StartDateTimeUtc,
+        EndDateTimeUtc,
+        TotalTokensAmount,
+        TokenBasePriceUsd,
+        TokenDecimals,
         MinInvestAmountUsd,
         AmountInvestedFiat,
         AmountInvestedBtc,
