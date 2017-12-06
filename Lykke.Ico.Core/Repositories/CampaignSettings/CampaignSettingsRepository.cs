@@ -18,7 +18,7 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
             _table = AzureTableStorage<CampaignSettingsEntity>.Create(connectionStringManager, "CampaignSettings", log);
         }
 
-        public async Task<ICampaignSettings> GetAsync(string email)
+        public async Task<ICampaignSettings> GetAsync()
         {
             return await _table.GetDataAsync(GetPartitionKey(), GetRowKey());
         }
