@@ -3,7 +3,7 @@ using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Lykke.Ico.Core.Repositories.CampaignInfo
 {
-    public class CampaignInfoEntity : AzureTableEntity
+    internal class CampaignInfoEntity : AzureTableEntity
     {
         [IgnoreProperty]
         public string Name

@@ -4,7 +4,7 @@ using System;
 
 namespace Lykke.Ico.Core.Repositories.InvestorHistory
 {
-    public class InvestorHistoryEntity : AzureTableEntity, IInvestorHistoryItem
+    internal class InvestorHistoryEntity : AzureTableEntity, IInvestorHistoryItem
     {
         [IgnoreProperty]
         public string Email { get => PartitionKey; }

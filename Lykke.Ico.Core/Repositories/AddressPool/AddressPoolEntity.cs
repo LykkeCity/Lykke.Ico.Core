@@ -3,7 +3,7 @@ using System;
 
 namespace Lykke.Ico.Core.Repositories.AddressPool
 {
-    public class AddressPoolEntity : TableEntity, IAddressPoolItem
+    internal class AddressPoolEntity : TableEntity, IAddressPoolItem
     {
         [IgnoreProperty]
         public int Id { get => Int32.Parse(RowKey.TrimStart(new char[] { '0' })); }

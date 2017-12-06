@@ -4,7 +4,7 @@ using System;
 
 namespace Lykke.Ico.Core.Repositories.AddressPoolHistory
 {
-    public class AddressPoolHistoryEntity : AzureTableEntity, IAddressPoolHistoryItem
+    internal class AddressPoolHistoryEntity : AzureTableEntity, IAddressPoolHistoryItem
     {
         [IgnoreProperty]
         public string Email { get => PartitionKey; }
