@@ -19,9 +19,9 @@ namespace Lykke.Ico.Core.Repositories.InvestorTransaction
             _tableStorage = AzureTableStorage<InvestorTransactionEntity>.Create(connectionStringManager, "InvestorTransactions", log);
         }
 
-        public async Task<IInvestorTransaction> GetAsync(string email, string transactionId)
+        public async Task<IInvestorTransaction> GetAsync(string email, string uniqueId)
         {
-            return await _tableStorage.GetDataAsync(GetPartitionKey(email), GetRowKey(transactionId));
+            return await _tableStorage.GetDataAsync(GetPartitionKey(email), GetRowKey(uniqueId));
         }
 
         public async Task<IEnumerable<IInvestorTransaction>> GetByEmailAsync(string email)
@@ -36,12 +36,12 @@ namespace Lykke.Ico.Core.Repositories.InvestorTransaction
             await _tableStorage.InsertOrReplaceAsync(new InvestorTransactionEntity
             {
                 PartitionKey = GetPartitionKey(entity.Email),
-                RowKey = GetRowKey(entity.TransactionId),
+                RowKey = GetRowKey(entity.UniqueId),
                 CreatedUtc = entity.CreatedUtc,
                 Currency = entity.Currency,
                 BlockId = entity.BlockId,
                 PayInAddress = entity.PayInAddress,
-                Transaction = entity.Transaction,
+                TransactionId = entity.UniqueId,
                 Amount = entity.Amount,
                 AmountUsd = entity.AmountUsd,
                 AmountToken = entity.AmountToken,

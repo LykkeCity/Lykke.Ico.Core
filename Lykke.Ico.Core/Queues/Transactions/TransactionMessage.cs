@@ -2,7 +2,7 @@
 
 namespace Lykke.Ico.Core.Queues.Transactions
 {
-    [QueueMessage(QueueName = Consts.Transactions.Queues.Transactions)]
+    [QueueMessage(QueueName = Consts.Transactions.Queues.Investor)]
     public class TransactionMessage : IMessage
     {
         public string Email { get; set; }

@@ -5,7 +5,7 @@ namespace Lykke.Ico.Core.Repositories.InvestorTransaction
 { 
     public interface IInvestorTransactionRepository
     {
-        Task<IInvestorTransaction> GetAsync(string email, string transactionId);
+        Task<IInvestorTransaction> GetAsync(string email, string uniqueId);
 
         Task<IEnumerable<IInvestorTransaction>> GetByEmailAsync(string email);
 

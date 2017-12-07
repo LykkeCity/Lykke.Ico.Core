@@ -6,18 +6,18 @@
         {
             public class Queues
             {
-                public const string InvestorConfirmation = "email-investor-confirmation";
-                public const string InvestorSummary = "email-investor-summary";
-                public const string InvestorKycRequest = "email-investor-kyc-request";
-                public const string InvestorNewTransaction = "email-investor-new-transaction";
-                public const string InvestorNeedMoreInvestment = "email-investor-need-more-investment";
+                public const string InvestorConfirmation = "investor-email-confirmation";
+                public const string InvestorSummary = "investor-email-summary";
+                public const string InvestorKycRequest = "investor-email-kyc-request";
+                public const string InvestorNewTransaction = "investor-email-new-transaction";
+                public const string InvestorNeedMoreInvestment = "investor-email-need-more-investment";
             }
 
             public class Subjects
             {
                 public const string InvestorConfirmation = "Email Confirmation - Procivis ICO";
                 public const string InvestorSummary = "Summary - Procivis ICO";
-                public const string InvestorKycRequest = "KYC Requered - Procivis ICO";
+                public const string InvestorKycRequest = "KYC Required - Procivis ICO";
                 public const string InvestorNewTransaction = "New Transaction - Procivis ICO";
                 public const string InvestorNeedMoreInvestment = "Need More Investment - Procivis ICO";
             }
@@ -36,7 +36,7 @@
         {
             public class Queues
             {
-                public const string Transactions = "transactions";
+                public const string Investor = "investor-transaction";
             }
         }
     }
