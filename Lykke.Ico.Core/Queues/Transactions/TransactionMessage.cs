@@ -7,6 +7,8 @@ namespace Lykke.Ico.Core.Queues.Transactions
     {
         public string Email { get; set; }
 
+        public string UniqueId { get; set; }
+
         public string TransactionId { get; set; }
 
         public DateTime CreatedUtc { get; set; }
