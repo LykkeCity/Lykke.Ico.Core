@@ -36,7 +36,7 @@
         {
             public class Queues
             {
-                public const string BlockchainTransaction = "transaction-blockchain";
+                public const string Transactions = "transactions";
             }
         }
     }
