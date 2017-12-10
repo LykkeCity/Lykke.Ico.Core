@@ -129,7 +129,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
                 }
 
                 x.AmountUsd += amountUsd;
-                x.AmountToken = amountToken;
+                x.AmountToken += amountToken;
                 x.UpdatedUtc = DateTime.UtcNow;
 
                 return x;
