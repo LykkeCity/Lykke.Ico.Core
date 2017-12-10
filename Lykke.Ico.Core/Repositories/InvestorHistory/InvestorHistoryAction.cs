@@ -2,7 +2,11 @@
 {
     public enum InvestorHistoryAction
     {
-        Create,
-        Update
+        Add,
+        Confirm,
+        SaveAddresses,
+        IncrementAmount,
+        SaveKyc,
+        SaveKycResult
     }
 }

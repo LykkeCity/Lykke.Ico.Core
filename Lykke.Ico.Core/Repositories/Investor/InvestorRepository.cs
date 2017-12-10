@@ -45,7 +45,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
             };
 
             await _table.InsertAsync(entity);
-            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Create);
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Add);
 
             return entity;
         }
@@ -60,7 +60,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
                 return x;
             });
 
-            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Confirm);
         }
 
         public async Task SaveAddressesAsync(string email, string tokenAddress, string refundEthAddress, string refundBtcAddress,
@@ -80,7 +80,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
                 return x;
             });
 
-            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.SaveAddresses);
         }
 
         public async Task SaveKycAsync(string email, string kycRequestId)
@@ -94,7 +94,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
                 return x;
             });
 
-            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.SaveKyc);
         }
 
         public async Task SaveKycResultAsync(string email, bool kycPassed)
@@ -108,7 +108,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
                 return x;
             });
 
-            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.SaveKycResult);
         }
 
         public async Task IncrementAmount(string email, CurrencyType type, decimal amount, decimal amountUsd, decimal amountToken)
@@ -135,7 +135,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
                 return x;
             });
 
-            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.Update);
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.IncrementAmount);
         }
 
         public async Task RemoveAsync(string email)
