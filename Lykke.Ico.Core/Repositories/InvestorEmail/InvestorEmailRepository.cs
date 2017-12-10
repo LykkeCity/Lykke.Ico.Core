@@ -17,7 +17,7 @@ namespace Lykke.Ico.Core.Repositories.InvestorEmail
 
         public InvestorEmailRepository(IReloadingManager<string> connectionStringManager, ILog log)
         {
-            _table = AzureTableStorage<InvestorEmailEntity>.Create(connectionStringManager, "EmailHistory", log);
+            _table = AzureTableStorage<InvestorEmailEntity>.Create(connectionStringManager, "InvestorEmails", log);
         }
 
         public async Task<IEnumerable<IInvestorEmail>> GetAsync(string email)
