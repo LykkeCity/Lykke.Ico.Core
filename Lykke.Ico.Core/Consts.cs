@@ -24,11 +24,11 @@
 
             public class BodyTemplates
             {
-                public const string InvestorConfirmation = "investor-confirmation.html";
-                public const string InvestorSummary = "investor-summary.html";
-                public const string InvestorKycRequest = "investor-kyc-request.html";
-                public const string InvestorNewTransaction = "investor-new-transaction.html";
-                public const string InvestorNeedMoreInvestment = "investor-need-more-investment.html";
+                public const string InvestorConfirmation = "investor-confirmation";
+                public const string InvestorSummary = "investor-summary";
+                public const string InvestorKycRequest = "investor-kyc-request";
+                public const string InvestorNewTransaction = "investor-new-transaction";
+                public const string InvestorNeedMoreInvestment = "investor-need-more-investment";
             }
         }
 
