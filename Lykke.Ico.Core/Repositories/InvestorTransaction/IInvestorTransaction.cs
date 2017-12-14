@@ -16,6 +16,7 @@ namespace Lykke.Ico.Core.Repositories.InvestorTransaction
         decimal AmountToken { get; set; }
         decimal Fee { get; set; }
         decimal TokenPrice { get; set; }
+        string TokenPriceContext { get; set; }
         decimal ExchangeRate { get; set; }
         string ExchangeRateContext { get; set; }
     }

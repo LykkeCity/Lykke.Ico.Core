@@ -46,6 +46,7 @@ namespace Lykke.Ico.Core.Repositories.InvestorTransaction
                 AmountUsd = entity.AmountUsd,
                 AmountToken = entity.AmountToken,
                 TokenPrice = entity.TokenPrice,
+                TokenPriceContext = entity.TokenPriceContext,
                 ExchangeRate = entity.ExchangeRate,
                 ExchangeRateContext = entity.ExchangeRateContext
             });
