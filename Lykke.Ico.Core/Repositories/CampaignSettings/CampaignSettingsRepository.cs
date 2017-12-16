@@ -29,12 +29,15 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
             {
                 PartitionKey = GetPartitionKey(),
                 RowKey = GetRowKey(),
-                StartDateTimeUtc = settings.StartDateTimeUtc,
-                EndDateTimeUtc = settings.EndDateTimeUtc,
+                PreSaleStartDateTimeUtc = settings.PreSaleStartDateTimeUtc,
+                PreSaleEndDateTimeUtc = settings.PreSaleEndDateTimeUtc,
+                PreSaleTotalTokensAmount = settings.PreSaleTotalTokensAmount,
+                CrowdSaleStartDateTimeUtc = settings.CrowdSaleStartDateTimeUtc,
+                CrowdSaleEndDateTimeUtc = settings.CrowdSaleEndDateTimeUtc,
+                CrowdSaleTotalTokensAmount = settings.CrowdSaleTotalTokensAmount,
                 MinInvestAmountUsd = settings.MinInvestAmountUsd,
                 TokenBasePriceUsd = settings.TokenBasePriceUsd,
                 TokenDecimals = settings.TokenDecimals,
-                TotalTokensAmount = settings.TotalTokensAmount,
                 UpdatedUtc = DateTime.UtcNow
             });
         }

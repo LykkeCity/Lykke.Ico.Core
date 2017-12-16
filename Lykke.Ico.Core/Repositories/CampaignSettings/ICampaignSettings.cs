@@ -4,11 +4,17 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
 {
     public interface ICampaignSettings
     {
-        DateTime StartDateTimeUtc { get; set; }
+        DateTime PreSaleStartDateTimeUtc { get; set; }
 
-        DateTime EndDateTimeUtc { get; set; }
+        DateTime PreSaleEndDateTimeUtc { get; set; }
 
-        int TotalTokensAmount { get; set; }
+        int PreSaleTotalTokensAmount { get; set; }
+
+        DateTime CrowdSaleStartDateTimeUtc { get; set; }
+
+        DateTime CrowdSaleEndDateTimeUtc { get; set; }
+
+        int CrowdSaleTotalTokensAmount { get; set; }
 
         decimal TokenBasePriceUsd { get; set; }
 
