@@ -83,6 +83,21 @@ namespace Lykke.Ico.Core.Repositories.Investor
             await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.SaveAddresses);
         }
 
+        public async Task SaveAddressesAsync(string email, string tokenAddress, string refundEthAddress, string refundBtcAddress)
+        {
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.TokenAddress = tokenAddress;
+                x.RefundEthAddress = refundEthAddress;
+                x.RefundBtcAddress = refundBtcAddress;
+                x.UpdatedUtc = DateTime.UtcNow;
+
+                return x;
+            });
+
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.SaveAddressesBySupport);
+        }
+
         public async Task SaveKycAsync(string email, string kycRequestId)
         {
             var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
