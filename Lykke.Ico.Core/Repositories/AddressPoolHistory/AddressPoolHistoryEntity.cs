@@ -10,7 +10,7 @@ namespace Lykke.Ico.Core.Repositories.AddressPoolHistory
         public string Email { get => PartitionKey; }
 
         [IgnoreProperty]
-        public DateTime WhenUtc { get => Timestamp.UtcDateTime; }
+        public DateTime CreatedUtc { get => Timestamp.UtcDateTime; }
 
         public string EthPublicKey { get; set; }
 

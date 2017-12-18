@@ -6,7 +6,7 @@ namespace Lykke.Ico.Core.Repositories.AddressPoolHistory
     {
         string Email { get; }
 
-        DateTime WhenUtc { get; }
+        DateTime CreatedUtc { get; }
 
         string EthPublicKey { get; set; }
 
