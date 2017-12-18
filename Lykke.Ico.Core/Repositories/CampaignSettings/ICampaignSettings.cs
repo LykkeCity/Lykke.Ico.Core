@@ -21,7 +21,5 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
         int TokenDecimals { get; set; }
 
         decimal MinInvestAmountUsd { get; set; }
-
-        int TotalTokensAmount { get; }
     }
 }

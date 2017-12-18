@@ -26,14 +26,6 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
 
         public decimal MinInvestAmountUsd { get; set; }
 
-        public int TotalTokensAmount
-        {
-            get
-            {
-                return PreSaleTotalTokensAmount + CrowdSaleTotalTokensAmount;
-            }
-        }
-
         public DateTime UpdatedUtc { get; set; }
     }
 }
