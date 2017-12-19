@@ -5,7 +5,7 @@ namespace Lykke.Ico.Core.Helpers
 {
     public class TokenInfoHelper
     {
-        public static TokenInfo GetCurrentTokenInfo(ICampaignSettings campaignSettings, decimal soldTokens, 
+        public static TokenInfo GetTokenInfo(ICampaignSettings campaignSettings, decimal soldTokens, 
             DateTime txDateTimeUtc)
         {
             var isPreSale = campaignSettings.IsPreSale(txDateTimeUtc);
@@ -15,19 +15,19 @@ namespace Lykke.Ico.Core.Helpers
             {
                 return new TokenInfo
                 {
-                    Price = campaignSettings.TokenBasePriceUsd * 0.75M,
+                    Price = campaignSettings.GetTokenPrice(TokenPricePhase.PreSale),
                     Phase = TokenPricePhase.PreSale
                 };
             }
 
             if (isIsCrowdSale)
             {
-                if (soldTokens < 20_000_000M)
+                if (soldTokens < Consts.CrowdSale.InitialAmount)
                 {
                     return new TokenInfo
                     {
-                        Price = campaignSettings.TokenBasePriceUsd * 0.75M,
-                        Phase = TokenPricePhase.CrowdSaleFirst20_000_000
+                        Price = campaignSettings.GetTokenPrice(TokenPricePhase.CrowdSaleInitial),
+                        Phase = TokenPricePhase.CrowdSaleInitial
                     };
                 }
 
@@ -36,7 +36,7 @@ namespace Lykke.Ico.Core.Helpers
                 {
                     return new TokenInfo
                     {
-                        Price = campaignSettings.TokenBasePriceUsd * 0.80M,
+                        Price = campaignSettings.GetTokenPrice(TokenPricePhase.CrowdSaleFirstDay),
                         Phase = TokenPricePhase.CrowdSaleFirstDay
                     };
                 }
@@ -44,7 +44,7 @@ namespace Lykke.Ico.Core.Helpers
                 {
                     return new TokenInfo
                     {
-                        Price = campaignSettings.TokenBasePriceUsd * 0.85M,
+                        Price = campaignSettings.GetTokenPrice(TokenPricePhase.CrowdSaleFirstWeek),
                         Phase = TokenPricePhase.CrowdSaleFirstWeek
                     };
                 }
@@ -52,7 +52,7 @@ namespace Lykke.Ico.Core.Helpers
                 {
                     return new TokenInfo
                     {
-                        Price = campaignSettings.TokenBasePriceUsd * 0.90M,
+                        Price = campaignSettings.GetTokenPrice(TokenPricePhase.CrowdSaleSecondWeek),
                         Phase = TokenPricePhase.CrowdSaleSecondWeek
                     };
                 }
@@ -60,7 +60,7 @@ namespace Lykke.Ico.Core.Helpers
                 {
                     return new TokenInfo
                     {
-                        Price = campaignSettings.TokenBasePriceUsd,
+                        Price = campaignSettings.GetTokenPrice(TokenPricePhase.CrowdSaleLastWeek),
                         Phase = TokenPricePhase.CrowdSaleLastWeek
                     };
                 }

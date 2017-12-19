@@ -33,5 +33,10 @@
                 public const string Investor = "investor-transaction";
             }
         }
+
+        public class CrowdSale
+        {
+            public const decimal InitialAmount = 20_000_000M;
+        }
     }
 }

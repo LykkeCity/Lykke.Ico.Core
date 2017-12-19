@@ -3,7 +3,7 @@
     public enum TokenPricePhase
     {
         PreSale,
-        CrowdSaleFirst20_000_000,
+        CrowdSaleInitial,
         CrowdSaleFirstDay,
         CrowdSaleFirstWeek,
         CrowdSaleSecondWeek,
