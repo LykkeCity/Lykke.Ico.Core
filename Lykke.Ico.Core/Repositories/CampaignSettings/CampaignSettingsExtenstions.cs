@@ -39,5 +39,68 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
                     throw new ArgumentException($"Not supported phase={Enum.GetName(typeof(TokenPricePhase), phase)}");
             }
         }
+
+        public static TokenInfo GetTokenInfo(this ICampaignSettings self, decimal soldTokens, DateTime txDateTimeUtc)
+        {
+            var isPreSale = self.IsPreSale(txDateTimeUtc);
+            var isIsCrowdSale = self.IsCrowdSale(txDateTimeUtc);
+
+            if (isPreSale)
+            {
+                return new TokenInfo
+                {
+                    Price = self.GetTokenPrice(TokenPricePhase.PreSale),
+                    Phase = TokenPricePhase.PreSale
+                };
+            }
+
+            if (isIsCrowdSale)
+            {
+                if (soldTokens < Consts.CrowdSale.InitialAmount)
+                {
+                    return new TokenInfo
+                    {
+                        Price = self.GetTokenPrice(TokenPricePhase.CrowdSaleInitial),
+                        Phase = TokenPricePhase.CrowdSaleInitial
+                    };
+                }
+
+                var timeSpan = txDateTimeUtc - self.CrowdSaleStartDateTimeUtc;
+                if (timeSpan < TimeSpan.FromDays(1))
+                {
+                    return new TokenInfo
+                    {
+                        Price = self.GetTokenPrice(TokenPricePhase.CrowdSaleFirstDay),
+                        Phase = TokenPricePhase.CrowdSaleFirstDay
+                    };
+                }
+                else if (timeSpan < TimeSpan.FromDays(7))
+                {
+                    return new TokenInfo
+                    {
+                        Price = self.GetTokenPrice(TokenPricePhase.CrowdSaleFirstWeek),
+                        Phase = TokenPricePhase.CrowdSaleFirstWeek
+                    };
+                }
+                else if (timeSpan < TimeSpan.FromDays(7 * 2))
+                {
+                    return new TokenInfo
+                    {
+                        Price = self.GetTokenPrice(TokenPricePhase.CrowdSaleSecondWeek),
+                        Phase = TokenPricePhase.CrowdSaleSecondWeek
+                    };
+                }
+                else
+                {
+                    return new TokenInfo
+                    {
+                        Price = self.GetTokenPrice(TokenPricePhase.CrowdSaleLastWeek),
+                        Phase = TokenPricePhase.CrowdSaleLastWeek
+                    };
+                }
+            }
+
+            return null;
+        }
     }
 }
