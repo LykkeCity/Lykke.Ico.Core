@@ -10,20 +10,6 @@
                 public const string InvestorSummary = "investor-email-summary";
                 public const string InvestorNewTransaction = "investor-email-new-transaction";
             }
-
-            public class Subjects
-            {
-                public const string InvestorConfirmation = "Email Confirmation - Procivis ICO";
-                public const string InvestorSummary = "Summary - Procivis ICO";
-                public const string InvestorNewTransaction = "New Transaction - Procivis ICO";
-            }
-
-            public class BodyTemplates
-            {
-                public const string InvestorConfirmation = "investor-confirmation";
-                public const string InvestorSummary = "investor-summary";
-                public const string InvestorNewTransaction = "investor-new-transaction";
-            }
         }
 
         public class Transactions
