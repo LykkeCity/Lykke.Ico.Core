@@ -26,8 +26,9 @@ namespace Lykke.Ico.Core.Helpers
                             csEncrypt.FlushFinalBlock();
 
                             var encryptedBytes = msEncrypt.ToArray();
+                            var base64String = Convert.ToBase64String(encryptedBytes);
 
-                            return WebUtility.UrlEncode(Convert.ToBase64String(encryptedBytes));
+                            return WebUtility.UrlEncode(base64String);
                         }
                     }
                 }
