@@ -4,6 +4,7 @@
     {
         PayInEthAddress,
         PayInBtcAddress,
-        ConfirmationToken
+        ConfirmationToken,
+        KycId
     }
 }
