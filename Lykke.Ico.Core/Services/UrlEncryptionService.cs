@@ -2,7 +2,7 @@
 
 namespace Lykke.Ico.Core.Services
 {
-    public class UrlEncryptionService
+    public class UrlEncryptionService : IUrlEncryptionService
     {
         private readonly string _key;
         private readonly string _iv;
