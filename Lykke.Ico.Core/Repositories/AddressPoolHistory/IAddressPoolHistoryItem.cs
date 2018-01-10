@@ -4,6 +4,8 @@ namespace Lykke.Ico.Core.Repositories.AddressPoolHistory
 {
     public interface IAddressPoolHistoryItem
     {
+        int Id { get; }
+
         string Email { get; }
 
         DateTime CreatedUtc { get; }

@@ -16,12 +16,18 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
         private static readonly Object _lock = new Object();
         private readonly INoSQLTableStorage<AddressPoolEntity> _table;
         private readonly IAddressPoolHistoryRepository _addressPoolHistoryRepository;
+        private static string GetPartitionKey() => "";
         private static string GetRowKey(int id) => id.ToString().PadLeft(9, '0');
 
         public AddressPoolRepository(IReloadingManager<string> connectionStringManager, ILog log)
         {
             _table = AzureTableStorage<AddressPoolEntity>.Create(connectionStringManager, "AddressPool", log);
             _addressPoolHistoryRepository = new AddressPoolHistoryRepository(connectionStringManager, log);
+        }
+
+        public async Task<IEnumerable<IAddressPoolItem>> Get(int[] ids)
+        {
+            return await _table.GetDataRowKeysOnlyAsync(ids.Select(f => GetRowKey(f)));
         }
 
         public async Task<IAddressPoolItem> GetNextFree(string email)
@@ -53,7 +59,7 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
             {
                 BtcPublicKey = f.BtcPublicKey,
                 EthPublicKey = f.EthPublicKey,
-                PartitionKey = "",
+                PartitionKey = GetPartitionKey(),
                 RowKey = GetRowKey(f.Id)
             });
 

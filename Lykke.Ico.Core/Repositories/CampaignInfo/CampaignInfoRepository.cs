@@ -6,6 +6,7 @@ using Lykke.SettingsReader;
 using Common.Log;
 using System.Linq;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Lykke.Ico.Core.Repositories.CampaignInfo
 {
@@ -46,7 +47,27 @@ namespace Lykke.Ico.Core.Repositories.CampaignInfo
             entity.PartitionKey = GetPartitionKey();
             entity.RowKey = GetRowKey(type);
 
-            await _table.InsertOrMergeAsync(entity);
+            await _table.InsertOrReplaceAsync(entity);
+        }
+
+        public async Task<List<(string email, string uniqueId)>> GetLatestTransactionsAsync()
+        {
+            var value = await GetValueAsync(CampaignInfoType.LatestTransactions);
+
+            return string.IsNullOrEmpty(value) ?
+                new List<(string email, string uniqueId)>() : 
+                JsonConvert.DeserializeObject<List<(string email, string uniqueId)>>(value);
+        }
+
+        public async Task SaveLatestTransactionsAsync(string email, string uniqueId)
+        {
+            var transactions = await GetLatestTransactionsAsync();
+
+            transactions.Insert(0, (email, uniqueId));
+
+            var value = JsonConvert.SerializeObject(transactions.Take(100));
+
+            await SaveValueAsync(CampaignInfoType.LatestTransactions, value);
         }
 
         public Task IncrementValue(CampaignInfoType type, int value)

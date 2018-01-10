@@ -16,6 +16,7 @@
         InvestorsFilledIn,
         InvestorsPaidIn,
         InvestorsKycRequested,
-        InvestorsKycPassed
+        InvestorsKycPassed,
+        LatestTransactions
     }
 }

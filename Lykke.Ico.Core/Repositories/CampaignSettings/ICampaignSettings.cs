@@ -21,5 +21,7 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
         int TokenDecimals { get; set; }
 
         decimal MinInvestAmountUsd { get; set; }
+
+        bool EnableKycRequestSending { get; set; }
     }
 }
