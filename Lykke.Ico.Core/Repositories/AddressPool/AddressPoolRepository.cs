@@ -27,7 +27,14 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
 
         public async Task<IEnumerable<IAddressPoolItem>> Get(int[] ids)
         {
-            return await _table.GetDataRowKeysOnlyAsync(ids.Select(f => GetRowKey(f)));
+            var list = new List<IAddressPoolItem>();
+
+            foreach (var id in ids)
+            {
+                list.Add(await _table.GetDataAsync(GetPartitionKey(), GetRowKey(id)));
+            }
+
+            return list;
         }
 
         public async Task<IAddressPoolItem> GetNextFree(string email)
