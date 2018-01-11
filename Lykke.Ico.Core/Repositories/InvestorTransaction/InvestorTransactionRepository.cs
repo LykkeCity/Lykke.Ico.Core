@@ -31,24 +31,25 @@ namespace Lykke.Ico.Core.Repositories.InvestorTransaction
             return entities.OrderBy(f => f.CreatedUtc);
         }
 
-        public async Task SaveAsync(IInvestorTransaction entity)
+        public async Task SaveAsync(IInvestorTransaction tx)
         {
             await _table.InsertOrReplaceAsync(new InvestorTransactionEntity
             {
-                PartitionKey = GetPartitionKey(entity.Email),
-                RowKey = GetRowKey(entity.UniqueId),
-                CreatedUtc = entity.CreatedUtc,
-                Currency = entity.Currency,
-                BlockId = entity.BlockId,
-                PayInAddress = entity.PayInAddress,
-                TransactionId = entity.UniqueId,
-                Amount = entity.Amount,
-                AmountUsd = entity.AmountUsd,
-                AmountToken = entity.AmountToken,
-                TokenPrice = entity.TokenPrice,
-                TokenPriceContext = entity.TokenPriceContext,
-                ExchangeRate = entity.ExchangeRate,
-                ExchangeRateContext = entity.ExchangeRateContext
+                PartitionKey = GetPartitionKey(tx.Email),
+                RowKey = GetRowKey(tx.UniqueId),
+                CreatedUtc = tx.CreatedUtc,
+                Currency = tx.Currency,
+                BlockId = tx.BlockId,
+                PayInAddress = tx.PayInAddress,
+                TransactionId = tx.UniqueId,
+                Amount = tx.Amount,
+                AmountUsd = tx.AmountUsd,
+                AmountToken = tx.AmountToken,
+                TokenPrice = tx.TokenPrice,
+                TokenPriceContext = tx.TokenPriceContext,
+                ExchangeRate = tx.ExchangeRate,
+                ExchangeRateContext = tx.ExchangeRateContext,
+                Fee = tx.Fee
             });
         }
 

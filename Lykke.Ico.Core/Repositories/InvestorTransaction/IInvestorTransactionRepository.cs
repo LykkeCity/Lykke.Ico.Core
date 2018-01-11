@@ -9,7 +9,7 @@ namespace Lykke.Ico.Core.Repositories.InvestorTransaction
 
         Task<IEnumerable<IInvestorTransaction>> GetByEmailAsync(string email);
 
-        Task SaveAsync(IInvestorTransaction entity);
+        Task SaveAsync(IInvestorTransaction tx);
 
         Task RemoveAsync(string email);
     }
