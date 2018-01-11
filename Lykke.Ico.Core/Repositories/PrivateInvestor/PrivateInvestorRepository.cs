@@ -66,5 +66,10 @@ namespace Lykke.Ico.Core.Repositories.PrivateInvestor
                 return x;
             });
         }
+
+        public async Task RemoveAsync(string email)
+        {
+            await _table.DeleteIfExistAsync(GetPartitionKey(), GetRowKey(email));
+        }
     }
 }

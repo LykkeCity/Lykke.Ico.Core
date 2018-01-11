@@ -7,7 +7,7 @@ using Microsoft.WindowsAzure.Storage.Table;
 namespace Lykke.Ico.Core.Repositories.PrivateInvestor
 {
     [ValueTypeMergingStrategy(ValueTypeMergingStrategy.UpdateAlways)]
-    public class PrivateInvestorEntity : AzureTableEntity, IPrivateInvestor
+    internal class PrivateInvestorEntity : AzureTableEntity, IPrivateInvestor
     {
         [IgnoreProperty]
         public string Email
