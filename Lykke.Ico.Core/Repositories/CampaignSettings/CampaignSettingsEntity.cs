@@ -28,6 +28,8 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
 
         public bool KycEnableRequestSending { get; set; }
 
+        public string KycCampaignId { get; set; }
+
         public string KycLinkTemplate { get; set; }
 
         public DateTime UpdatedUtc { get; set; }

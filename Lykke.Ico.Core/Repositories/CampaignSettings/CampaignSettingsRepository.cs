@@ -39,6 +39,7 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
                 TokenBasePriceUsd = settings.TokenBasePriceUsd,
                 TokenDecimals = settings.TokenDecimals,
                 KycEnableRequestSending = settings.KycEnableRequestSending,
+                KycCampaignId = settings.KycCampaignId,
                 KycLinkTemplate = settings.KycLinkTemplate,
                 UpdatedUtc = DateTime.UtcNow
             });

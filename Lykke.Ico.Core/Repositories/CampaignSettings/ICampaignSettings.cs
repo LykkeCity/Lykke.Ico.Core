@@ -24,6 +24,8 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
 
         bool KycEnableRequestSending { get; set; }
 
+        string KycCampaignId { get; set; }
+
         string KycLinkTemplate { get; set; }
     }
 }
