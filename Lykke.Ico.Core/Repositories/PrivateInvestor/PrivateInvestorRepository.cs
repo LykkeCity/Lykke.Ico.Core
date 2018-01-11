@@ -29,7 +29,7 @@ namespace Lykke.Ico.Core.Repositories.PrivateInvestor
             return await _table.GetDataAsync(GetPartitionKey(), GetRowKey(email));
         }
 
-        public async Task<IPrivateInvestor> AddAsync(string email, Guid confirmationToken)
+        public async Task<IPrivateInvestor> AddAsync(string email)
         {
             var entity = new PrivateInvestorEntity
             {

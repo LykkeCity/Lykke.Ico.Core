@@ -6,7 +6,7 @@ namespace Lykke.Ico.Core.Repositories.PrivateInvestor
 {
     public interface IPrivateInvestorRepository
     {
-        Task<IPrivateInvestor> AddAsync(string email, Guid confirmationToken);
+        Task<IPrivateInvestor> AddAsync(string email);
         Task<IEnumerable<IPrivateInvestor>> GetAllAsync();
         Task<IPrivateInvestor> GetAsync(string email);
         Task SaveKycAsync(string email, string kycRequestId);
