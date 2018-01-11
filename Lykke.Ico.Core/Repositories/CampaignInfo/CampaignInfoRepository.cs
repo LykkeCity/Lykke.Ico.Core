@@ -50,13 +50,13 @@ namespace Lykke.Ico.Core.Repositories.CampaignInfo
             await _table.InsertOrReplaceAsync(entity);
         }
 
-        public async Task<List<(string email, string uniqueId)>> GetLatestTransactionsAsync()
+        public async Task<List<(string Email, string UniqueId)>> GetLatestTransactionsAsync()
         {
             var value = await GetValueAsync(CampaignInfoType.LatestTransactions);
 
             return string.IsNullOrEmpty(value) ?
-                new List<(string email, string uniqueId)>() : 
-                JsonConvert.DeserializeObject<List<(string email, string uniqueId)>>(value);
+                new List<(string, string)>() : 
+                JsonConvert.DeserializeObject<List<(string, string)>>(value);
         }
 
         public async Task SaveLatestTransactionsAsync(string email, string uniqueId)

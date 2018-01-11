@@ -12,7 +12,7 @@ namespace Lykke.Ico.Core.Repositories.CampaignInfo
         Task IncrementValue(CampaignInfoType type, int value);
         Task IncrementValue(CampaignInfoType type, decimal value);
         Task IncrementValue(CampaignInfoType type, ulong value);
-        Task<List<(string email, string uniqueId)>> GetLatestTransactionsAsync();
+        Task<List<(string Email, string UniqueId)>> GetLatestTransactionsAsync();
         Task SaveLatestTransactionsAsync(string email, string uniqueId);
     }
 }
