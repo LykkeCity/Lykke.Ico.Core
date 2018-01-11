@@ -7,7 +7,7 @@ namespace Lykke.Ico.Core.Repositories.AddressPool
     {
         Task AddBatchAsync(List<IAddressPoolItem> keys);
 
-        Task<IEnumerable<IAddressPoolItem>> Get(int[] ids);
+        Task<IAddressPoolItem> Get(int id);
 
         Task<IAddressPoolItem> GetNextFree(string email);
     }

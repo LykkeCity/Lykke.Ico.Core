@@ -6,7 +6,7 @@ namespace Lykke.Ico.Core.Repositories.AddressPoolHistory
 {
     public interface IAddressPoolHistoryRepository
     {
-        Task<IEnumerable<IAddressPoolHistoryItem>> Get(int[] ids);
+        Task<IAddressPoolHistoryItem> Get(int id);
 
         Task SaveAsync(IAddressPoolItem addressPoolItem, string email);
     }

@@ -20,9 +20,9 @@ namespace Lykke.Ico.Core.Repositories.AddressPoolHistory
             _table = AzureTableStorage<AddressPoolHistoryEntity>.Create(connectionStringManager, "AddressPoolHistory", log);
         }
 
-        public async Task<IEnumerable<IAddressPoolHistoryItem>> Get(int[] ids)
+        public async Task<IAddressPoolHistoryItem> Get(int id)
         {
-            return await _table.GetDataRowKeysOnlyAsync(ids.Select(f => GetRowKey(f)));
+            return await _table.GetDataAsync(GetPartitionKey(), GetRowKey(id));
         }
 
         public async Task SaveAsync(IAddressPoolItem addressPoolItem, string email)
