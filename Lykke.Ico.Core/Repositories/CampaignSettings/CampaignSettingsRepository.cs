@@ -38,6 +38,8 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
                 MinInvestAmountUsd = settings.MinInvestAmountUsd,
                 TokenBasePriceUsd = settings.TokenBasePriceUsd,
                 TokenDecimals = settings.TokenDecimals,
+                KycEnableRequestSending = settings.KycEnableRequestSending,
+                KycLinkTemplate = settings.KycLinkTemplate,
                 UpdatedUtc = DateTime.UtcNow
             });
         }
