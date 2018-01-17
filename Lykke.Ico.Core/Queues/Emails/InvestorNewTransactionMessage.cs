@@ -16,6 +16,6 @@
         public decimal TransactionAmountUsd { get; set; }
         public decimal TransactionAmount { get; set; }
         public decimal TransactionFee { get; set; }
-        public decimal TransactionAsset { get; set; }
+        public string TransactionAsset { get; set; }
     }
 }
