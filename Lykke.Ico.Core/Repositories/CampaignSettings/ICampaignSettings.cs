@@ -27,5 +27,7 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
         string KycCampaignId { get; set; }
 
         string KycLinkTemplate { get; set; }
+
+        bool CaptchaEnable { get; set; }
     }
 }

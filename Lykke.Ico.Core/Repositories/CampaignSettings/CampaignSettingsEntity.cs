@@ -32,6 +32,8 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
 
         public string KycLinkTemplate { get; set; }
 
+        public bool CaptchaEnable { get; set; }
+
         public DateTime UpdatedUtc { get; set; }
     }
 }

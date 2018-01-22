@@ -41,6 +41,7 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
                 KycEnableRequestSending = settings.KycEnableRequestSending,
                 KycCampaignId = settings.KycCampaignId,
                 KycLinkTemplate = settings.KycLinkTemplate,
+                CaptchaEnable = settings.CaptchaEnable,
                 UpdatedUtc = DateTime.UtcNow
             });
         }
