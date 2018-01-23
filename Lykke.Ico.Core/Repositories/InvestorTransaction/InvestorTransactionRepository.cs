@@ -41,7 +41,7 @@ namespace Lykke.Ico.Core.Repositories.InvestorTransaction
                 Currency = tx.Currency,
                 BlockId = tx.BlockId,
                 PayInAddress = tx.PayInAddress,
-                TransactionId = tx.UniqueId,
+                TransactionId = tx.TransactionId,
                 Amount = tx.Amount,
                 AmountUsd = tx.AmountUsd,
                 AmountToken = tx.AmountToken,
