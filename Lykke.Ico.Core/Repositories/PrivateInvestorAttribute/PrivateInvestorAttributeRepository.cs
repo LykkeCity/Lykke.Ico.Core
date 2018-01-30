@@ -35,9 +35,9 @@ namespace Lykke.Ico.Core.Repositories.PrivateInvestorAttribute
             await _table.InsertOrMergeAsync(entity);
         }
 
-        public async Task RemoveAsync(PrivateInvestorAttributeType type, string email)
+        public async Task RemoveAsync(PrivateInvestorAttributeType type, string value)
         {
-            await _table.DeleteIfExistAsync(GetPartitionKey(type), GetRowKey(email));
+            await _table.DeleteIfExistAsync(GetPartitionKey(type), GetRowKey(value));
         }
     }
 }
