@@ -11,6 +11,7 @@
         AddressPoolCurrentSize,
         LastProcessedBlockBtc,
         LastProcessedBlockEth,
+        LastProcessedBlockEthInfura,
         InvestorsRegistered,
         InvestorsConfirmed,
         InvestorsFilledIn,
