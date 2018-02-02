@@ -30,6 +30,6 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
 
         bool CaptchaEnable { get; set; }
 
-        bool EnableCampaignUI { get; set; }
+        bool EnableCampaignFrontEnd { get; set; }
     }
 }

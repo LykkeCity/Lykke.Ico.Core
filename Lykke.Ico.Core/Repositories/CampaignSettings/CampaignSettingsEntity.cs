@@ -34,7 +34,7 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
 
         public bool CaptchaEnable { get; set; }
 
-        public bool EnableCampaignUI { get; set; }
+        public bool EnableCampaignFrontEnd { get; set; }
 
         public DateTime UpdatedUtc { get; set; }
     }

@@ -42,7 +42,7 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
                 KycCampaignId = settings.KycCampaignId,
                 KycLinkTemplate = settings.KycLinkTemplate,
                 CaptchaEnable = settings.CaptchaEnable,
-                EnableCampaignUI = settings.EnableCampaignUI,
+                EnableCampaignFrontEnd = settings.EnableCampaignFrontEnd,
                 UpdatedUtc = DateTime.UtcNow
             });
         }
