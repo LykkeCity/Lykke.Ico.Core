@@ -19,6 +19,13 @@ namespace Lykke.Ico.Core.Repositories.InvestorTransaction
             _table = AzureTableStorage<InvestorTransactionEntity>.Create(connectionStringManager, "InvestorTransactions", log);
         }
 
+        public async Task<IEnumerable<IInvestorTransaction>> GetAllAsync()
+        {
+            var entities = await _table.GetDataAsync();
+
+            return entities.OrderBy(f => f.CreatedUtc);
+        }
+
         public async Task<IInvestorTransaction> GetAsync(string email, string uniqueId)
         {
             return await _table.GetDataAsync(GetPartitionKey(email), GetRowKey(uniqueId));
