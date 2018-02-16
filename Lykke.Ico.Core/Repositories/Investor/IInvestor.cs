@@ -36,6 +36,8 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         DateTime? KycPassedUtc { get; set; }
 
+        DateTime? KycManuallyUpdatedUtc { get; set; }
+
         decimal AmountBtc { get; set; }
 
         decimal AmountEth { get; set; }

@@ -112,12 +112,13 @@ namespace Lykke.Ico.Core.Repositories.Investor
             await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.SaveKyc);
         }
 
-        public async Task SaveKycResultAsync(string email, bool kycPassed)
+        public async Task SaveKycResultAsync(string email, bool? kycPassed, bool manual = false)
         {
             var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
             {
                 x.KycPassed = kycPassed;
-                x.KycPassedUtc = DateTime.UtcNow;
+                x.KycPassedUtc = kycPassed == null ? (DateTime?)null : DateTime.UtcNow;
+                x.KycManuallyUpdatedUtc = manual ? DateTime.UtcNow : (DateTime?)null;
                 x.UpdatedUtc = DateTime.UtcNow;
 
                 return x;
