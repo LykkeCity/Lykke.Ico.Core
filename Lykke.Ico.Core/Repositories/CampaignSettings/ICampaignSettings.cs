@@ -22,6 +22,8 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
 
         decimal MinInvestAmountUsd { get; set; }
 
+        decimal HardCapUsd { get; set; }
+
         bool KycEnableRequestSending { get; set; }
 
         string KycCampaignId { get; set; }

@@ -36,6 +36,7 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
                 CrowdSaleEndDateTimeUtc = settings.CrowdSaleEndDateTimeUtc,
                 CrowdSaleTotalTokensAmount = settings.CrowdSaleTotalTokensAmount,
                 MinInvestAmountUsd = settings.MinInvestAmountUsd,
+                HardCapUsd = settings.HardCapUsd,
                 TokenBasePriceUsd = settings.TokenBasePriceUsd,
                 TokenDecimals = settings.TokenDecimals,
                 KycEnableRequestSending = settings.KycEnableRequestSending,
