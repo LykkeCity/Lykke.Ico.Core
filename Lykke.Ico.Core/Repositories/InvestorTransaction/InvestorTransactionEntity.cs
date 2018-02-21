@@ -21,6 +21,12 @@ namespace Lykke.Ico.Core.Repositories.InvestorTransaction
             get => RowKey;
         }
 
+        [IgnoreProperty]
+        public DateTime ProcessedUtc
+        {
+            get => Timestamp.Date.ToUniversalTime();
+        }
+
         public DateTime CreatedUtc { get; set; }
         public CurrencyType Currency { get; set; }
         public string TransactionId { get; set; }

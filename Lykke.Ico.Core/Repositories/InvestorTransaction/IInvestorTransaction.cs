@@ -6,6 +6,7 @@ namespace Lykke.Ico.Core.Repositories.InvestorTransaction
     {
         string Email { get; }
         string UniqueId { get; }
+        DateTime ProcessedUtc { get; }
         DateTime CreatedUtc { get; set; }
         CurrencyType Currency { get; set; }
         string BlockId { get; set; }
