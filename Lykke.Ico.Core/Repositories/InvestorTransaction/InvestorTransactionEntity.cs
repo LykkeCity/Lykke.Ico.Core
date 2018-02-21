@@ -24,7 +24,7 @@ namespace Lykke.Ico.Core.Repositories.InvestorTransaction
         [IgnoreProperty]
         public DateTime ProcessedUtc
         {
-            get => Timestamp.Date.ToUniversalTime();
+            get => Timestamp.DateTime.ToUniversalTime();
         }
 
         public DateTime CreatedUtc { get; set; }
