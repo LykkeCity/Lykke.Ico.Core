@@ -55,12 +55,13 @@ namespace Lykke.Ico.Core.Repositories.PrivateInvestor
             });
         }
 
-        public async Task SaveKycResultAsync(string email, bool kycPassed)
+        public async Task SaveKycResultAsync(string email, bool? kycPassed, bool manual = false)
         {
-            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            var entity = await _table.ReplaceAsync(GetPartitionKey(), GetRowKey(email), x =>
             {
                 x.KycPassed = kycPassed;
-                x.KycPassedUtc = DateTime.UtcNow;
+                x.KycPassedUtc = kycPassed == null ? (DateTime?)null : DateTime.UtcNow;
+                x.KycManuallyUpdatedUtc = manual ? DateTime.UtcNow : (DateTime?)null;
                 x.UpdatedUtc = DateTime.UtcNow;
 
                 return x;

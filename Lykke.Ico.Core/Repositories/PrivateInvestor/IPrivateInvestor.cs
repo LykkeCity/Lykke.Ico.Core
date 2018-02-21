@@ -15,5 +15,7 @@ namespace Lykke.Ico.Core.Repositories.PrivateInvestor
         bool? KycPassed { get; set; }
 
         DateTime? KycPassedUtc { get; set; }
+
+        DateTime? KycManuallyUpdatedUtc { get; set; }
     }
 }
