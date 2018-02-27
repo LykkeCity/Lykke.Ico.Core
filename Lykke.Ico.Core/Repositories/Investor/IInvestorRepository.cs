@@ -21,6 +21,8 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         Task IncrementAmount(string email, CurrencyType type, decimal amount, decimal amountUsd, decimal amountToken);
 
+        Task IncrementTokens(string email, decimal amountToken);
+
         Task SaveKycAsync(string email, string kycRequestId);
 
         Task SaveKycResultAsync(string email, bool? kycPassed, bool manual = false);

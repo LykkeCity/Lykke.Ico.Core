@@ -8,6 +8,7 @@
         SaveAddressesBySupport,
         IncrementAmount,
         SaveKyc,
-        SaveKycResult
+        SaveKycResult,
+        IncrementTokens
     }
 }

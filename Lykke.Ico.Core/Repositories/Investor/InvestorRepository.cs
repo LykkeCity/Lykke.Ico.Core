@@ -154,6 +154,19 @@ namespace Lykke.Ico.Core.Repositories.Investor
             await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.IncrementAmount);
         }
 
+        public async Task IncrementTokens(string email, decimal amountToken)
+        {
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.AmountToken += amountToken;
+                x.UpdatedUtc = DateTime.UtcNow;
+
+                return x;
+            });
+
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.IncrementTokens);
+        }
+
         public async Task RemoveAsync(string email)
         {
             await _table.DeleteIfExistAsync(GetPartitionKey(), GetRowKey(email));
