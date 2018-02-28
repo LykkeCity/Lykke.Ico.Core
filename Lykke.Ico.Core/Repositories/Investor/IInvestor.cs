@@ -42,10 +42,22 @@ namespace Lykke.Ico.Core.Repositories.Investor
 
         decimal AmountEth { get; set; }
 
-         decimal AmountFiat { get; set; }
+        decimal AmountFiat { get; set; }
 
         decimal AmountUsd { get; set; }
 
         decimal AmountToken { get; set; }
+
+        string ReferralCode { get; set; }
+
+        DateTime? ReferralCodeUtc { get; set; }
+
+        string ReferralCodeApplied { get; set; }
+
+        DateTime? ReferralCodeAppliedUtc { get; set; }
+
+        int ReferralsNumber { get; set; }
+
+        DateTime? ReferralsNumberUtc { get; set; }
     }
 }

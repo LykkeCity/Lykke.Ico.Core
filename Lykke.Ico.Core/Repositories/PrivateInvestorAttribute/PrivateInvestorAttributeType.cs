@@ -2,6 +2,7 @@
 {
     public enum PrivateInvestorAttributeType
     {
-        KycId
+        KycId,
+        ReferralCode
     }
 }

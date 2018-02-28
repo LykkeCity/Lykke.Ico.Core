@@ -33,5 +33,13 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
         bool CaptchaEnable { get; set; }
 
         bool EnableCampaignFrontEnd { get; set; }
+
+        bool ReferralProgramEnabled { get; set; }
+
+        int? ReferralCodeLength { get; set; }
+
+        decimal? ReferralOwnerDiscount { get; set; }
+
+        decimal? ReferralDiscount { get; set; }
     }
 }

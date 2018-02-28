@@ -12,5 +12,6 @@ namespace Lykke.Ico.Core.Repositories.PrivateInvestor
         Task SaveKycAsync(string email, string kycRequestId);
         Task SaveKycResultAsync(string email, bool? kycPassed, bool manual = false);
         Task RemoveAsync(string email);
+        Task SaveReferralCode(string email, string referralCode);
     }
 }

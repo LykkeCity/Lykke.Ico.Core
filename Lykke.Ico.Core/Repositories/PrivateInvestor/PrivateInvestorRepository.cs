@@ -68,6 +68,18 @@ namespace Lykke.Ico.Core.Repositories.PrivateInvestor
             });
         }
 
+        public async Task SaveReferralCode(string email, string referralCode)
+        {
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.ReferralCode = referralCode;
+                x.ReferralCodeUtc = DateTime.UtcNow;
+                x.UpdatedUtc = DateTime.UtcNow;
+
+                return x;
+            });
+        }
+
         public async Task RemoveAsync(string email)
         {
             await _table.DeleteIfExistAsync(GetPartitionKey(), GetRowKey(email));

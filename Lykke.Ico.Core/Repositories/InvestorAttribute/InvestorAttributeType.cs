@@ -5,6 +5,7 @@
         PayInEthAddress,
         PayInBtcAddress,
         ConfirmationToken,
-        KycId
+        KycId,
+        ReferralCode
     }
 }

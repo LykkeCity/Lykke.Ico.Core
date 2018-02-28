@@ -9,6 +9,8 @@
         IncrementAmount,
         SaveKyc,
         SaveKycResult,
-        IncrementTokens
+        IncrementTokens,
+        SaveReferralCode,
+        ApplyReferralCode
     }
 }

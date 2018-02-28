@@ -17,5 +17,9 @@ namespace Lykke.Ico.Core.Repositories.PrivateInvestor
         DateTime? KycPassedUtc { get; set; }
 
         DateTime? KycManuallyUpdatedUtc { get; set; }
+
+        string ReferralCode { get; set; }
+
+        DateTime? ReferralCodeUtc { get; set; }
     }
 }

@@ -56,5 +56,17 @@ namespace Lykke.Ico.Core.Repositories.Investor
         public decimal AmountUsd { get; set; }
 
         public decimal AmountToken { get; set; }
+
+        public string ReferralCode { get; set; }
+
+        public DateTime? ReferralCodeUtc { get; set; }
+
+        public string ReferralCodeApplied { get; set; }
+
+        public DateTime? ReferralCodeAppliedUtc { get; set; }
+
+        public int ReferralsNumber { get; set; }
+
+        public DateTime? ReferralsNumberUtc { get; set; }
     }
 }

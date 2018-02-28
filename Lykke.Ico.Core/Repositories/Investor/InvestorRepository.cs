@@ -167,6 +167,47 @@ namespace Lykke.Ico.Core.Repositories.Investor
             await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.IncrementTokens);
         }
 
+        public async Task SaveReferralCode(string email, string referralCode)
+        {
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.ReferralCode = referralCode;
+                x.ReferralCodeUtc = DateTime.UtcNow;
+                x.UpdatedUtc = DateTime.UtcNow;
+
+                return x;
+            });
+
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.SaveReferralCode);
+        }
+
+        public async Task ApplyReferralCode(string email, string referralCodeApplied)
+        {
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.ReferralCodeApplied = referralCodeApplied;
+                x.ReferralCodeAppliedUtc = DateTime.UtcNow;
+                x.UpdatedUtc = DateTime.UtcNow;
+
+                return x;
+            });
+
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.ApplyReferralCode);
+        }
+
+        public async Task IncrementReferrals(string email)
+        {
+            var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
+            {
+                x.ReferralsNumber++;
+                x.UpdatedUtc = DateTime.UtcNow;
+
+                return x;
+            });
+
+            await _investorHistoryRepository.SaveAsync(entity, InvestorHistoryAction.IncrementTokens);
+        }
+
         public async Task RemoveAsync(string email)
         {
             await _table.DeleteIfExistAsync(GetPartitionKey(), GetRowKey(email));
