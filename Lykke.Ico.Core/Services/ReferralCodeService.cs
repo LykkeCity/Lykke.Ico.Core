@@ -27,13 +27,13 @@ namespace Lykke.Ico.Core.Services
             {
                 var code = ReferralCodeHelper.Generate(referralCodeLength);
 
-                var attr = await _investorAttributeRepository.GetInvestorEmailAsync(
+                var email = await _investorAttributeRepository.GetInvestorEmailAsync(
                     InvestorAttributeType.ReferralCode, code);
-                if (string.IsNullOrEmpty(attr))
+                if (string.IsNullOrEmpty(email))
                 {
-                    attr = await _privateInvestorAttributeRepository.GetInvestorEmailAsync(
+                    email = await _privateInvestorAttributeRepository.GetInvestorEmailAsync(
                         PrivateInvestorAttributeType.ReferralCode, code);
-                    if (string.IsNullOrEmpty(attr))
+                    if (string.IsNullOrEmpty(email))
                     {
                         return code;
                     }
@@ -43,6 +43,25 @@ namespace Lykke.Ico.Core.Services
             }
 
             throw new Exception("Failed to get referral code. Max attempts increased");
+        }
+
+        public async Task<string> GetReferralEmail(string code)
+        {
+            var email = await _investorAttributeRepository.GetInvestorEmailAsync(
+                InvestorAttributeType.ReferralCode, code);
+            if (!string.IsNullOrEmpty(email))
+            {
+                return email;
+            }
+
+            var privateEmail = await _privateInvestorAttributeRepository.GetInvestorEmailAsync(
+                PrivateInvestorAttributeType.ReferralCode, code);
+            if (string.IsNullOrEmpty(privateEmail))
+            {
+                return privateEmail;
+            }
+
+            return null;
         }
     }
 }

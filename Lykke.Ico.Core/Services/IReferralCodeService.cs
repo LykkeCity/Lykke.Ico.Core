@@ -5,5 +5,6 @@ namespace Lykke.Ico.Core.Services
     public interface IReferralCodeService
     {
         Task<string> GetReferralCode(int referralCodeLength);
+        Task<string> GetReferralEmail(string code);
     }
 }
