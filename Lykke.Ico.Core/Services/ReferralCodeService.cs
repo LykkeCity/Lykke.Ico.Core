@@ -56,7 +56,7 @@ namespace Lykke.Ico.Core.Services
 
             var privateEmail = await _privateInvestorAttributeRepository.GetInvestorEmailAsync(
                 PrivateInvestorAttributeType.ReferralCode, code);
-            if (string.IsNullOrEmpty(privateEmail))
+            if (!string.IsNullOrEmpty(privateEmail))
             {
                 return privateEmail;
             }
