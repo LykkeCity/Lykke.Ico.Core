@@ -38,7 +38,7 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
 
         public bool EnableCampaignFrontEnd { get; set; }
 
-        public bool ReferralProgramEnabled { get; set; }
+        public bool EnableReferralProgram { get; set; }
 
         public int? ReferralCodeLength { get; set; }
 

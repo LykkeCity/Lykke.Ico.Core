@@ -44,7 +44,7 @@ namespace Lykke.Ico.Core.Repositories.CampaignSettings
                 KycLinkTemplate = settings.KycLinkTemplate,
                 CaptchaEnable = settings.CaptchaEnable,
                 EnableCampaignFrontEnd = settings.EnableCampaignFrontEnd,
-                ReferralProgramEnabled = settings.ReferralProgramEnabled,
+                EnableReferralProgram = settings.EnableReferralProgram,
                 ReferralCodeLength = settings.ReferralCodeLength,
                 ReferralDiscount = settings.ReferralDiscount,
                 ReferralOwnerDiscount = settings.ReferralOwnerDiscount,
