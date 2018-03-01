@@ -200,6 +200,7 @@ namespace Lykke.Ico.Core.Repositories.Investor
             var entity = await _table.MergeAsync(GetPartitionKey(), GetRowKey(email), x =>
             {
                 x.ReferralsNumber++;
+                x.ReferralsNumberUtc = DateTime.UtcNow;
                 x.UpdatedUtc = DateTime.UtcNow;
 
                 return x;
