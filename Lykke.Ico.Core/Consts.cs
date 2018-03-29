@@ -11,6 +11,7 @@
                 public const string InvestorNewTransaction = "investor-email-new-transaction";
                 public const string InvestorKycReminder = "investor-kyc-reminder";
                 public const string InvestorReferralCode = "investor-referral-code";
+                public const string Investor20MFix = "investor-20m-fix";
             }
         }
 
